@@ -14,7 +14,7 @@ The pTunes framework consists of four main components:
 
 * The collection sink connects (e.g., via USB) to the base station (e.g., a laptop computer), passing the collected information on to the base station and receiving optimized MAC parameters from the base station.
 
-* The base station runs the pTunes controller, which is implemented in Java. The controller communicates with the collection sink, decides when to determine new MAC parameters, and triggers the optimization process.
+* The base station runs the pTunes controller, which is implemented in Java. The controller communicates with the collection sink, decides when to determine new MAC parameters, and triggers the optimization.
 
 * The MAC parameter optimization problem is modeled as a constraint program and solved on the base station using a branch-and-bound algorithm coupled with a complete search routine, both of which are provided by the Interval Constraint (IC) solver of the [ECLiPSe](http://eclipseclp.org/) constraint programming system.
 
@@ -23,7 +23,7 @@ Code Layout
 
 `/ptunes/contiki` (full [Contiki](http://www.contiki-os.org/) v2.3 source tree from early 2011)
 
-`/ptunes/contiki/apps/adaptive-mac` (pTunes test application running on the sensor nodes and sink)
+`/ptunes/contiki/apps/adaptive-mac` (pTunes test application running on the sensor nodes and the sink)
 
 `/ptunes/controller` (pTunes controller running on the base station, including build scripts and config files)
 
@@ -31,14 +31,12 @@ Code Layout
 
 `/ptunes/controller/eclipse` ([ECLiPSe](http://eclipseclp.org/) constraint programming system])
 
-`/ptunes/controller/lib` ([ECLiPSe](http://eclipseclp.org/) and [Apache log4j](http://logging.apache.org/log4j/1.2/) libraries)
-
-`/ptunes/cp` ([ECLiPSe](http://eclipseclp.org/) optimization code, including the implementation of the X-MAC and LPP models)
+`/ptunes/cp` (optimization code, including the implementation of the X-MAC and LPP models)
 
 Getting pTunes to Work
 ----------------------
 
-pTunes is a research prototype. You should be able to built and run pTunes, however, using TelosB-compliant devices, such as the [Tmote Sky](http://www.snm.ethz.ch/Projects/TmoteSky), and a base station computer. Depending on the operating system used on the base station, you may need to update the [ECLiPSe](http://eclipseclp.org/) system and Java libraries accordingly.
+pTunes is a research prototype and, as such, not ready for use in a real deployment. You should be able to built and run pTunes, however, on TelosB-compliant devices, such as the [Tmote Sky](http://www.snm.ethz.ch/Projects/TmoteSky), and a base station computer. Depending on the base station operating system, you may need to exchange the [ECLiPSe](http://eclipseclp.org/) system and Java libraries accordingly.
 
 Research
 --------
