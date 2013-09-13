@@ -10,7 +10,7 @@ System and Implementation Overview
 
 The pTunes framework consists of four main components:
 
-* Sensor nodes run the default data collection protocol in [Contiki](http://www.contiki-os.org/) v2.3 on top of the X-MAC or LPP link layer. Both link layers expose an interface that allows to change selected operational parameters at runtime. pTunes periodically interrupts the normal application operation for a very short time simultaneously at all nodes. During these short phases, pTunes uses sequential [Glossy](http://www.tik.ee.ethz.ch/~ferrarif/sw/glossy/index.html) floods to collect information about the current network conditions and to disseminate optimized MAC parameters to all nodes in the network.
+* Sensor nodes run the default data collection protocol in [Contiki](http://www.contiki-os.org/) v2.3 on top of the X-MAC or LPP link layer. Both link layers expose an interface that allows to change selected operational parameters at runtime. pTunes periodically interrupts the normal application operation for a very short time simultaneously on all nodes. During these short phases, pTunes uses sequential [Glossy](http://www.tik.ee.ethz.ch/~ferrarif/sw/glossy/index.html) floods to collect information about the current network conditions and to disseminate optimized MAC parameters.
 
 * The collection sink connects (e.g., via USB) to the base station (e.g., a laptop computer), passing the collected information on to the base station and receiving optimized MAC parameters from the base station.
 
@@ -29,14 +29,14 @@ Code Layout
 
 `/ptunes/controller/src` (Java code of the pTunes controller)
 
-`/ptunes/controller/eclipse` ([ECLiPSe](http://eclipseclp.org/) constraint programming system])
+`/ptunes/controller/eclipse` ([ECLiPSe](http://eclipseclp.org/) constraint programming system)
 
 `/ptunes/cp` (optimization code, including the implementation of the X-MAC and LPP models)
 
 Getting pTunes to Work
 ----------------------
 
-pTunes is a research prototype and, as such, not ready for use in a real deployment. You should be able to built and run pTunes, however, on TelosB-compliant devices, such as the [Tmote Sky](http://www.snm.ethz.ch/Projects/TmoteSky), and a base station computer. Depending on the base station operating system, you may need to exchange the [ECLiPSe](http://eclipseclp.org/) system and Java libraries accordingly.
+pTunes is a research prototype and, as such, not ready for use in a real deployment. You should be able to built and run pTunes, however, on TelosB-compliant devices, such as the [Tmote Sky](http://www.snm.ethz.ch/Projects/TmoteSky). Depending on the operating system used on the base station, you may need to update to the corresponding [ECLiPSe](http://eclipseclp.org/) system and Java libraries.
 
 Research
 --------
