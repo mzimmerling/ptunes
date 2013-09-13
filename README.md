@@ -8,15 +8,15 @@ Check out our IPSN'12 paper and tech report (both are available [here](http://ww
 System and Implementation Overview
 ----------------------------------
 
-The pTunes framework currently consists of four main components:
+The pTunes framework consists of four main components:
 
-* Sensor nodes run the default data collection protocol in [Contiki](http://www.contiki-os.org/) v2.3 on top of the X-MAC or LPP link layer. Both link layers expose an interface that allows to change selected operational parameters at runtime. pTunes periodically interrupts the normal application operation for a very short time, with microsecond accuracy simultaneously at all nodes. During these short phases, pTunes uses sequential [Glossy](http://www.tik.ee.ethz.ch/~ferrarif/sw/glossy/index.html) floods to collect information about the current routing topology, link qualities, and traffic load, and to disseminate optimized MAC parameters to all nodes in the network.
+* Sensor nodes run the default data collection protocol in [Contiki](http://www.contiki-os.org/) v2.3 on top of the X-MAC or LPP link layer. Both link layers expose an interface that allows to change selected operational parameters at runtime. pTunes periodically interrupts the normal application operation for a very short time simultaneously at all nodes. During these short phases, pTunes uses sequential [Glossy](http://www.tik.ee.ethz.ch/~ferrarif/sw/glossy/index.html) floods to collect information about the current network conditions and to disseminate optimized MAC parameters to all nodes in the network.
 
-* The collection sink connects (e.g., via USB) to the base station (e.g., a laptop computer), passing collected network state information on to the base station and receiving optimized MAC parameters from the base station.
+* The collection sink connects (e.g., via USB) to the base station (e.g., a laptop computer), passing the collected information on to the base station and receiving optimized MAC parameters from the base station.
 
-* The base station runs the pTunes controller, which is implemented in Java. The controller communicates with the collection sink, decides when to determine new MAC parameters, and starts the optimization process accordingly.
+* The base station runs the pTunes controller, which is implemented in Java. The controller communicates with the collection sink, decides when to determine new MAC parameters, and triggers the optimization process.
 
-* The MAC parameter optimization problem is modeled as a constraint program and solved on the base station using branch-and-bound coupled with a complete search routine, both of which are provided by the Interval Constraint (IC) solver of the [ECLiPSe](http://eclipseclp.org/) constraint programming system.
+* The MAC parameter optimization problem is modeled as a constraint program and solved on the base station using a branch-and-bound algorithm coupled with a complete search routine, both of which are provided by the Interval Constraint (IC) solver of the [ECLiPSe](http://eclipseclp.org/) constraint programming system.
 
 Code Layout
 -----------
