@@ -23,9 +23,9 @@ Code Layout
 
 `/ptunes/contiki` (full [Contiki](http://www.contiki-os.org/) v2.3 source tree from early 2011)
 
-`/ptunes/contiki/apps/adaptive-mac` (pTunes test application running on the sensor nodes and the collection sink)
+`/ptunes/contiki/apps/adaptive-mac` (pTunes test application running on the sensor nodes and sink)
 
-`/ptunes/controller` (pTunes controller running on the base station, including build scripts and configuration files)
+`/ptunes/controller` (pTunes controller running on the base station, including build scripts and config files)
 
 `/ptunes/controller/src` (Java code of the pTunes controller)
 
@@ -38,7 +38,7 @@ Code Layout
 Getting pTunes to Work
 ----------------------
 
-pTunes is a research prototype. You should be able to built and run pTunes, however, using TelosB-compliant devices, such as the [Tmote Sky](http://www.snm.ethz.ch/Projects/TmoteSky), and a base station computer. Depending on the operating system used on the base station, you may need to update the [ECLiPSe](http://eclipseclp.org/) constraint programming system and Java libraries accordingly.
+pTunes is a research prototype. You should be able to built and run pTunes, however, using TelosB-compliant devices, such as the [Tmote Sky](http://www.snm.ethz.ch/Projects/TmoteSky), and a base station computer. Depending on the operating system used on the base station, you may need to update the [ECLiPSe](http://eclipseclp.org/) system and Java libraries accordingly.
 
 Research
 --------
