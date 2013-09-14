@@ -8,7 +8,7 @@ Check out our IPSN'12 paper and tech report (both are available [here](http://ww
 System and Implementation Overview
 ----------------------------------
 
-The pTunes framework consists of four main components:
+The pTunes framework consists currently of four main components:
 
 * Sensor nodes run the default data collection protocol in [Contiki](http://www.contiki-os.org/) v2.3 on top of the X-MAC or LPP link layer. Both link layers expose an interface that allows to change selected operational parameters at runtime. pTunes periodically interrupts the normal application operation for a very short time simultaneously on all nodes. During these short phases, pTunes uses sequential [Glossy](http://www.tik.ee.ethz.ch/~ferrarif/sw/glossy/index.html) floods to collect information about the current network conditions and to disseminate optimized MAC parameters.
 
