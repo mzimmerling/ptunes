@@ -1,0 +1,13 @@
+:- module(lips).
+:- export lips / 0.
+:- export lips / 1.
+:- export lips / 2.
+:- comment(categories, ["Development Tools"]).
+:- comment(summary, "Measure the system's speed using the naive reverse benchmark").
+:- comment(author, "Joachim Schimpf, ECRC Munich").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:37 $").
+:- comment(desc, html("\n    Measure the system's speed in logical inferences per second, using\n    the infamous naive reverse program. This test does not say very much\n    about the quality of a system. All it gives is an indication about\n    the speed of list processing.\n    <P>\n    The executed program is:\n    <PRE>\n    nreverse([], []).\n    nreverse([X|L0],L) :-\n\t    nreverse(L0, L1),\n\t    concatenate(L1, [X], L).\n\n    concatenate([], L, L).\n    concatenate([X|L1], L2, [X|L3]) :-\n\t    concatenate(L1, L2, L3).\n    </PRE>\n    and the standard benchmark is to call nreverse/2 with a 30-element\n    list as the first and a variable as the second argument.  This\n    instance is assumed to have 496 logical inferences.\n    ")).
+:- comment(lips / 0, [template : "lips", summary : "Run the benchmark a reasonable number of times and print the average speed"]).
+:- comment(lips / 1, [template : "lips(+Count)", summary : "Run the benchmark Count times and print the average speed"]).
+:- comment(lips / 2, [template : "lips(+Count,+Length)", summary : "Run the benchmark Count times with lists of length Length"]).

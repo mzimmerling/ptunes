@@ -1,0 +1,37 @@
+:- module(util).
+:- export add_path / 1.
+:- export add_suffix / 1.
+:- export between / 3.
+:- export c_compile_and_load / 1.
+:- export compiled / 0.
+:- export compile_selection / 0.
+:- export edit / 1.
+:- export file_info / 1.
+:- export list_error / 3.
+:- export interface / 1.
+:- export stream / 1.
+:- export streams / 0.
+:- export read_line / 1.
+:- export read_line / 2.
+:- export time / 1.
+:- tool(time / 1, time_body / 2).
+:- tool(compile_selection / 0, compile_selection / 1).
+:- tool(edit / 1, edit / 2).
+:- comment(summary, "Various utility predicates for program development").
+:- comment(categories, ["Programming Utilities"]).
+:- comment(author, "Various, ECRC Munich").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:37 $").
+:- comment(add_path / 1, [template : "add_path(+Directory)", summary : "The directory will be added at the beginning of the library path."]).
+:- comment(add_suffix / 1, [template : "add_suffix(+Suffix)", summary : "The Suffix string will be added at the beginning of the prolog_suffix list."]).
+:- comment(between / 3, [template : "between(+From, +To, ?I)", summary : "Generates integers between From and To", desc : html("Succeeds if From and To are integers and I unifies with a\n\t  number between the two.  On backtracking it generates all\n\t  values for I starting from From onwards.")]).
+:- comment(compiled / 0, [template : "compiled", summary : "List all currently compiled files and indicate if they have been modified since they were compiled."]).
+:- comment(edit / 1, [template : "edit(+PredSpec)", summary : "Invoke an editor on the source of the specified predicate (UNIX only)"]).
+:- comment(file_info / 1, [template : "file_info(+File)", summary : "List all information about the specified File"]).
+:- comment(interface / 1, [template : "interface(+Module)", summary : "List the module interface of the specified Module"]).
+:- comment(list_error / 3, [template : "list_error(+String, -ErrNo, -ErrMsg)", summary : "Find the event number whose message contains the specified substring"]).
+:- comment(read_line / 1, [template : "read_line(-String)", summary : "Defined as read_string(input, end_of_line, _Length, String)"]).
+:- comment(read_line / 2, [template : "read_line(+Stream, -String)", summary : "Defined as read_string(Stream, end_of_line, _Length, String)"]).
+:- comment(stream / 1, [template : "stream(+Stream)", summary : "List all information about the specified I/O stream"]).
+:- comment(streams / 0, [template : "streams", summary : "List information about the currently opened I/O streams"]).
+:- comment(time / 1, [template : "time(Goal)", summary : "Call the goal Goal, measure its runtime (cputime) and print the result after success or failure"]).

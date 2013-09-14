@@ -1,0 +1,9 @@
+:- module(numbervars).
+:- export numbervars / 3.
+:- export syntax_option('$VAR').
+:- comment(categories, ["Algorithms", "Compatibility"]).
+:- comment(summary, "C-Prolog style numbervars predicate").
+:- comment(author, "Joachim Schimpf, ECRC Munich").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:37 $").
+:- comment(desc, html("\n    Implements the numbervars(Term, From, To) predicate of C-Prolog.  Term\n    is any term, From and To are integer numbers.  All variables in Term\n    are instantiated to terms of the form\n    <PRE>\n\t$VAR(N) \n    </PRE>\n    where N is an integer number.  The first encountered variable will be\n    coded by the number From, on exit To is instantiated to the next\n    unused number. \n    <P>\n    This predicate can thus be used to encode nonground term using a\n    ground representation.  Note that metaterms can be used for the same\n    purpose, but their use is both more efficient and more general,\n    because the variables are not actually instantiated and so they can be\n    used again as variables when needed. \n    ")).

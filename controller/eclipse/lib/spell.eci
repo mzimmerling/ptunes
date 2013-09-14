@@ -1,0 +1,7 @@
+:- module(spell).
+:- comment(categories, ["Development Tools"]).
+:- comment(summary, "Predicate name spelling correction").
+:- comment(author, "Stefano Novello, ECRC Munich").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:37 $").
+:- comment(desc, html("\n    The effect of loading this library is to modify the event handler\n    for calling an undefined procedure.  A spelling correction\n    algorithm is used to see if the cause was a misspelling of an\n    existing predicate. \n    ")).

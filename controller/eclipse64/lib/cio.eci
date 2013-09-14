@@ -1,0 +1,17 @@
+:- module(cio).
+:- export see / 1.
+:- export seeing / 1.
+:- export seen / 0.
+:- export skip / 1.
+:- export skip / 2.
+:- export tab / 1.
+:- export tab / 2.
+:- export tell / 1.
+:- export telling / 1.
+:- export told / 0.
+:- comment(categories, ["Compatibility"]).
+:- comment(summary, "Predicates for C-Prolog style I/O (see/tell family)").
+:- comment(author, "Micha Meier, ECRC Munich").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:37 $").
+:- comment(desc, html("\n    This library provides C-Prolog compatible I/O predicates. It is included\n    in the C-Prolog compatibility package, but can be used independently.\n    The predicates change ECLiPSe's input or output stream, respectively.")).

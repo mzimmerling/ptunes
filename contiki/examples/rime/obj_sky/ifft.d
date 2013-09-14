@@ -1,0 +1,4 @@
+obj_sky/ifft.o: ../../core/lib/ifft.c ../../core/lib/ifft.h \
+  ../../platform/sky/contiki-conf.h ../../cpu/msp430/msp430def.h
+../../core/lib/ifft.c ../../core/lib/ifft.h :
+  ../../platform/sky/contiki-conf.h ../../cpu/msp430/msp430def.h :

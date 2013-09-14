@@ -1,0 +1,56 @@
+:- module(cprolog).
+:- reexport cio.
+:- reexport eclipse_language except get / 1, put / 1, instance / 2, (abolish) / 1, macro((if) / 2, _150483, _150484).
+:- export op(0, xfx, of).
+:- export op(0, xfx, with).
+:- export op(0, xfy, do).
+:- export op(0, xfx, @).
+:- export op(0, fx, -?->).
+:- export macro((with) / 2, (=) / 2, []).
+:- export macro((of) / 2, (=) / 2, []).
+:- export syntax_option(nl_in_quotes).
+:- export syntax_option(no_blanks).
+:- export syntax_option(no_array_subscripts).
+:- export syntax_option(limit_arg_precedence).
+:- export syntax_option(doubled_quote_is_quote).
+:- export syntax_option(bar_is_no_atom).
+:- export syntax_option(no_attributes).
+:- export syntax_option(no_curly_arguments).
+:- export syntax_option(blanks_after_sign).
+:- export chtab(36, lower_case).
+:- export chtab(92, symbol).
+:- export chtab(128, string_quote).
+:- export chtab(34, list_quote).
+:- export op(300, xfx, mod).
+:- export op(500, fx, +).
+:- export op(500, fx, -).
+:- export op(900, fy, spy).
+:- export op(900, fy, nospy).
+:- export '.' / 3.
+:- export (abolish) / 2.
+:- export consult / 1.
+:- export current_functor / 2.
+:- export current_predicate / 2.
+:- export db_reference / 1.
+:- export erased / 1.
+:- export fileerrors / 0.
+:- export get / 1.
+:- export get0 / 1.
+:- export heapused / 1.
+:- export instance / 2.
+:- export leash / 1.
+:- export log10 / 2.
+:- export log / 2.
+:- export nofileerrors / 0.
+:- export primitive / 1.
+:- export prompt / 2.
+:- export put / 1.
+:- export reconsult / 1.
+:- export sh / 0.
+:- comment(categories, ["Compatibility"]).
+:- comment(summary, 'C-Prolog compatibility package').
+:- comment(author, 'Various, ECRC Munich').
+:- comment(copyright, 'Cisco Systems, Inc').
+:- comment(date, '$Date: 2009/02/19 05:38:37 $').
+:- comment(desc, html('\n    One of the requirements during the development of ECLiPSe has been the\n    aim of minimising the work required to port traditional Prolog\n    programs to ECLiPSe.  A de-facto standard for many years was the\n    C-Prolog dialect, often referred to as Edinburgh Prolog.  Therefore,\n    many of the non standard predicates in C-Prolog have also been\n    included in ECLiPSe.  It is of course impossible to achieve total\n    compatibility between the two systems.  To assist in making the\n    changes necessary to run a C-Prolog program on the current version of\n    ECLiPSe, we describve here the predicates available in the\n    C-Prolog compatibility library and summarise the principal\n    differences between ECLiPSe Prolog and C-Prolog. \n    <P>\n    Most of the C-Prolog predicates are also ECLiPSe built-in predicates\n    and so they can be always accessed. \n    <P>\n    Please note that this text does not detail the functionality of\n    C-Prolog, refer to the C-Prolog documentation for this information. \n    <P>\n    The effect of the compatibility library is local to the module where\n    it is loaded. For maximum compatibility, a C-Prolog program should\n    be wrapped in a separate module starting with a directive like\n    <PRE>\n    :- module(mymodule, [], cprolog).\n    </PRE>\n    In this case, Eclipse-specific language constructs will not be available.\n    <P>\n    If the compatibility package is loaded into a standard module, e.g. like\n    <PRE>\n    :- module(mymixedmdule).\n    :- use_module(library(cprolog)).\n    </PRE>\n    then C-Prolog and Eclipse language features can be used together. \n    However, ambiguities must be resolved explicitly and confusion may\n    arise from the different meaning of quotes in Eclipse vs C-Prolog.\n    <P>\n    Note that the C-Prolog compatibility package includes the <EM>cio</EM>\n    library (for see/1, seeing/1, seen/0, skip/1, tab/1, tell/1, telling/1,\n    told/0).\n    <P>\n    The following C-Prolog predicates are not available in ECLiPSe, or\n    the corresponding predicates have a different semantics: \n    <DL>\n    <DT>assert/2, asserta/2, assertz/2, clause/3 \n\t<DD>ECLiPSe does not support database references for clauses. \n    <DT>expand_term/2 \n\t<DD>This is not supported.  ECLiPSe provides the macro facility\n\t    for transforming input terms (see chapter 13). \n    <DT>&#39;LC&#39;/0, &#39;NOLC&#39;/0 \n\t<DD>These are not supported in ECLiPSe. \n    </DL>\n    <P>\n    The following differences remain even with the compatibility package: \n    <DL>\n    <DT>Database References \n\t<DD>ECLiPSe provides database references only for terms in the indexed database, not for program clauses. \n    <DT>Numbers \n\t<DD>C-Prolog has a tendency to "prefer" integers over real\n\tnumbers.  For instance, under C-Prolog when the call X is\n\t4.0/2.0 is made, X is instantiated to an integer.  This\n\tbehaviour does not occur in ECLiPSe.  The order of integers\n\tand reals in the standard order is different. \n    <DT>Operators \n\t<DD>In C-Prolog there is a bug regarding the operator not -- it\n\tbinds closer than its precedence declaration. \n    <DT>Strings \n\t<DD>Strings are simulated in C-Prolog by lists.  Under C-Prolog\n\tmode, ECLiPSe provides this functionality -- double-quoted\n\tstrings are parsed as lists of integers.  This can cause\n\tconfusion when pure ECLiPSe predicates are used in C-Prolog\n\tmode, e.g.  substring/3 will not accept double-quoted items,\n\tsince they are lists, not ECLiPSe strings.  The built-in\n\tstring_list/2 converts between both representations. \n    <DT>consult/1, reconsult/1 \n\t<DD>These are implemented by simply calling the ECLiPSe predicate\n\tcompile/1.  By default all compiled procedures are static. \n\tProcedures on which assert/1 etc.  will be applied, have to be\n\tdeclared as dynamic using dynamic/1.  The notation [-File] for\n\treconsult/1 is not supported. \n    <DT>get/1\n\t<DD>This is similar to the ECLiPSe predicate get/1, but\n\tcontrol characters and blank spaces are skipped. \n    <DT>put/1\n\t<DD>This is similar to the ECLiPSe predicate put/1, but it\n\tfirst applies arithmetic evaluation to its argument. \n    <DT>heapused/1\n\t<DD>Needed for evaluating heapused in arithmetic expressions. \n\tIt returns the sum of code heap and general heap usage. \n    <DT>instance/2\n\t<DD>Note that this compatibility predicate redefines the\n\tECLiPSe builtin of the same name but different meaning (which\n\tis no longer available in C-Prolog mode).  It is implemented\n\tusing the ECLiPSe predicate referenced_record/2. \n    <DT>log/2, log10/2\n\t<DD>These are not predicates in C-Prolog (arithmetic\n\tfunctors), but in ECLiPSe they are needed for evaluating log/1\n\tand log10/1 in arithmetic expressions. \n    <DT>ttyput/1\n    \t<DD>corresponds to the DEC-10 Prolog predicate \n    </DL>\n    The list below describes the syntax differences between ECLiPSe\n    and C-Prolog.  The following C-Prolog properties are simulated by\n    the compatibility package: \n    <UL>\n\t<LI>single (resp. double) quote must be doubled between single (resp. double) quotes. \n\t<LI>$ is a normal character. \n\t<LI>the symbol | is not an atom. \n    </UL>\n    The following properties of original C-Prolog are not simulated by\n    the compatibility package: \n    <UL>\n\t<LI>a clause can not be ended by end of file. \n\t<LI>based integers are not accepted. \n\t<LI>comments are not a delimiter (just ignored). \n\t<LI>{} is not an atom. \n\t<LI>[] can not be a functor. \n    </UL>\n    ')).
+:- comment(see_also, [library(cio), library(quintus)]).

@@ -1,0 +1,51 @@
+:- module(calendar).
+:- export date_to_mjd / 2.
+:- export mjd_to_date / 2.
+:- export mjd_to_weekday / 2.
+:- export mjd_to_dow / 3.
+:- export mjd_to_dow / 2.
+:- export mjd_to_time / 2.
+:- export time_to_mjd / 2.
+:- export mjd_to_dy / 2.
+:- export dy_to_mjd / 2.
+:- export mjd_to_dwy / 2.
+:- export mjd_to_dwy / 3.
+:- export dwy_to_mjd / 2.
+:- export dwy_to_mjd / 3.
+:- export ymd_to_mjd / 2.
+:- export mjd_to_ymd / 2.
+:- export mjd_to_ywd / 2.
+:- export ywd_to_mjd / 2.
+:- export unix_to_mjd / 2.
+:- export mjd_to_unix / 2.
+:- export mjd_now / 1.
+:- export jd_to_mjd / 2.
+:- export mjd_to_jd / 2.
+:- comment(categories, ["Algorithms"]).
+:- comment(summary, "Routines for calendar computations, based on modified julian dates (MJD).").
+:- comment(date, "$Date: 2009/11/16 04:41:48 $").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(author, "Joachim Schimpf, IC-Parc").
+:- comment(index, ["date and time", "julian date", "ISO 8601"]).
+:- comment(desc, html("\tJulian Dates (JD) and Modified Julian Dates (MJD) are a\n\tconsecutive day numbering scheme widely used in astronomy,\n\tspace travel etc. It is defined for a long period from\n\t12 noon, 1 Jan 4713 BC  to  12 noon, 1 Jan 3268 AD.\n\t<P>\n\tHere we use MJDs as the central representation (JDs are a bit\n\tawkward because they change at noon and are very large numbers).\n\t<P>\n\tNote that you can use fractional MJDs to denote the time of day.\n\tThe time is then defined to be Universal Time (UT, formerly GMT).\n\tThat means that every day has a unique integer number,\n\tor every time point has a unique float representation!\n\t(Using double floats, the resolution is better than 10\n\tmicroseconds until the year 2576, and better than 100\n\tmicroseconds until the year 24826).\n\t<P>\n\tDifferences between times are obviously trivial to compute,\n\tand so are weekdays (by simple mod(7) operation).\n\t<P>\n\tThe code is valid for dates starting from\n\t\t 1 Mar 0004 = MJD -677422 = JD 1722578.5\n\t<P>\n\tThe relationship between JD and MJD is simply\n\tMJD = JD-2400000.5, ie MJD 0 = 17 Nov 1858.")).
+:- comment(eg, html("\nWhat day of the week was the 29th of December 1959?\n<PRE>\n[eclipse 1]: lib(calendar).\n[eclipse 2]: date_to_mjd(29/12/1959, MJD), mjd_to_weekday(MJD,W).\nMJD = 36931\nW = tuesday\n</PRE>\nWhat date and time is it now?\n<PRE>\n[eclipse 3]: mjd_now(MJD), mjd_to_date(MJD,Date), mjd_to_time(MJD,Time).\nDate = 19 / 5 / 1999\nMJD = 51317.456238425926\nTime = 10 : 56 : 59.000000017695129\n</PRE>\nHow many days are there in the 20th century?\n<PRE>\n[eclipse 4]: N is date_to_mjd(1/1/2001) - date_to_mjd(1/1/1901).\nN = 36525\n</PRE>\nThe library code does not detect invalid dates, but this is easily done by converting a date to its MJD and\nback and checking whether they match:\n<PRE>\n[eclipse 5]: [user].\nvalid_date(Date) :-\n        date_to_mjd(Date,MJD),\n        mjd_to_date(MJD,Date).\n\n[eclipse 6]: valid_date(29/2/1900). % 1900 is not a leap year!\nno (more) solution.\n</PRE>")).
+:- comment(date_to_mjd / 2, [summary : "Convert a date in day/month/year form to an MJD day number", args : ["DMY" : "A structure of the form D/M/Y where D,M and Y are integers", "MJD" : "Variable or integer"], amode : date_to_mjd(++, ?), see_also : [mjd_to_date / 2]]).
+:- comment(dwy_to_mjd / 2, [summary : "Convert a DayOfWeek/WeekOfYear/Year representation to MJD", desc : html("Convert a DayOfWeek/WeekOfYear/Year representation to MJD,\n    \twhere DayOfWeek is the day number within the week (1 for monday up to\n\t7 for sunday), and WeekOfYear is the week number within the year\n\t(starting with 1 for the week that contains January 1st)"), args : ["DWY" : "structure of the form Day/Week/Year", "MJD" : "Variable or integer"], amode : dwy_to_mjd(++, ?)]).
+:- comment(dwy_to_mjd / 3, [summary : "Convert a DayOfWeek/WeekOfYear/Year representation to MJD", desc : html("as dwy_to_mjd/2, but allows to choose a different starting day for weeks, specified as atom monday, tuesday etc"), args : ["DWY" : "Structure of the form Day/Week/Year", "FirstWeekday" : "Atom (monday,tuesday,etc)", "MJD" : "Variable or integer"], amode : dwy_to_mjd(++, ++, ?)]).
+:- comment(dy_to_mjd / 2, [summary : "Convert a DayOfYear/Year representation to MJD", desc : html("Convert a DayOfYear/Year representation to MJD, where DayOfYear is the relative day number starting with 1 on every January 1st"), args : ["DY" : "structure of the form DayOfYear/Year", "MJD" : "Variable or integer"], amode : dy_to_mjd(++, ?)]).
+:- comment(jd_to_mjd / 2, [summary : "Convert Julian Dates (JD) to Modified Julian Dates (MJD)", desc : html("Convert Julian Dates (JD) to Modified Julian Dates (MJD). The relationship is simply MJD = JD-2400000.5"), args : ["JD" : "Integer or float", "MJD" : "Variable or float"], amode : jd_to_mjd(++, ?)]).
+:- comment(mjd_now / 1, [summary : "Returns the current date/time as (float) MJD", args : ["MJD" : "Variable or float"], amode : mjd_now(?)]).
+:- comment(mjd_to_date / 2, [summary : "Converts an MJD day number into the corresponding Day/Month/Year", args : ["MJD" : "Integer or float", "DMY" : "Variable or structure"], amode : mjd_to_date(++, ?), see_also : [date_to_mjd / 2]]).
+:- comment(mjd_to_dwy / 2, [summary : "Convert an MJD to a DayOfWeek/WeekOfYear/Year representation", desc : html("Convert MJDs to a DayOfWeek/WeekOfYear/Year representation,\n    \twhere DayOfWeek is the day number within the week (1 for monday up to\n\t7 for sunday), and WeekOfYear is the week number within the year\n\t(starting with 1 for the week that contains January 1st)"), args : ["MJD" : "Integer or float", "DWY" : "Variable or structure of the form Day/Week/Year"], amode : mjd_to_dwy(++, ?)]).
+:- comment(mjd_to_dwy / 3, [summary : "Convert an MJD to a DayOfWeek/WeekOfYear/Year representation", desc : html("as mjd_to_dwy/2, but allows to choose a different starting day for weeks, specified as atom monday, tuesday etc"), args : ["MJD" : "Integer or float", "FirstWeekday" : "Atom (monday,tuesday,etc)", "DWY" : "Structure of the form Day/Week/Year"], amode : mjd_to_dwy(++, ++, ?)]).
+:- comment(mjd_to_dy / 2, [summary : "Convert an MJD to a DayOfYear/Year representation", desc : html("Convert MJD to a DayOfYear/Year representation, where DayOfYear is the relative day number starting with 1 on every January 1st"), args : ["MJD" : "Integer or float", "DY" : "Variable or structure of the form DayOfYear/Year"], amode : mjd_to_dy(++, ?)]).
+:- comment(mjd_to_jd / 2, [summary : "Convert Modified Julian Dates (MJD) to Julian Dates (JD)", desc : html("Convert Modified Julian Dates (MJD) to Julian Dates (JD). The relationship is simply JD = MJD+2400000.5"), args : ["MJD" : "Integer or float", "JD" : "Variable or float"], amode : mjd_to_jd(++, ?)]).
+:- comment(mjd_to_time / 2, [summary : "Extracts the time in H:M:S form from a float MJD", desc : html("returns the time of day (UTC/GMT) corresponding to the given MJD as Hour:Minute:Seconds structure, where Hour and Minute are integers and Seconds is a float"), args : ["MJD" : "Integer or float", "HMS" : "Variable or structure"], amode : mjd_to_time(++, ?)]).
+:- comment(mjd_to_unix / 2, [summary : "Convert an MJD to the UNIX time representation", args : ["MJD" : "Integer or float", "UnixTime" : "Variable or integer"], amode : mjd_to_unix(++, ?)]).
+:- comment(mjd_to_weekday / 2, [summary : "returns the weekday of the specified MJD as atom monday, tuesday etc", args : ["MJD" : "Integer or float", "DayName" : "Variable or atom"], amode : mjd_to_weekday(++, ?)]).
+:- comment(mjd_to_ymd / 2, [summary : "Converts an MJD day number into the corresponding ISO8601 Year-Month-Day form", args : ["MJD" : "Integer or float", "YMD" : "Variable or structure"], amode : mjd_to_ymd(++, ?), see_also : [ymd_to_mjd / 2]]).
+:- comment(mjd_to_ywd / 2, [summary : "Convert an MJD to ISO8601 Year-Week-Day representation", desc : html("Convert MJDs to a Year-WeekOfYear-DayOfWeek representation\n\taccording to ISO 8601, where DayOfWeek is the day number within the\n\tweek (1 for monday up to 7 for sunday), and WeekOfYear is the ISO8601\n\tweek number (where week 1 is the week containing January 4th).\n\tNote that January 1 to 3 may belong to the previous year."), args : ["MJD" : "Integer or float", "YWD" : "Variable or structure of the form Year-Week-Day"], amode : mjd_to_ywd(++, ?)]).
+:- comment(time_to_mjd / 2, [summary : "Convert the time in H:M:S form to a float MJD <1.0", desc : html("Returns a float MJD <1.0 encoding the time of day (UTC/GMT). This can be added to an integral day number to obtain a full MJD."), args : ["HMS" : "A structure of the form H:M:S or H:M, where H and M are integers and S is a float", "MJD" : "Variable or float"], amode : time_to_mjd(++, ?)]).
+:- comment(unix_to_mjd / 2, [summary : "Convert the UNIX time representation into a (float) MJD", args : ["UnixTime" : "Integer or float (seconds since 1 Jan 1970)", "MJD" : "Variable or float"], amode : unix_to_mjd(++, ?)]).
+:- comment(ymd_to_mjd / 2, [summary : "Convert a date in ISO8601 Year-Month-Day form to an MJD day number", args : ["YMD" : "A structure of the form Y-M-D where D,M and Y are integers", "MJD" : "Variable or integer"], amode : ymd_to_mjd(++, ?), see_also : [mjd_to_ymd / 2]]).
+:- comment(ywd_to_mjd / 2, [summary : "Convert an ISO8601 Year-Week-Day representation to MJD", desc : html("Convert a Year-WeekOfYear-DayOfWeek representation to MJD,\n    \twhere DayOfWeek is the day number within the week (1 for monday\n\tup to 7 for sunday), and WeekOfYear is the ISO8601 week number\n\t(where week 1 is the week containing January 4th). Note that\n\tJanuary 1 to 3 may belong to the previous year."), args : ["DWY" : "structure of the form Year-Week-Day", "MJD" : "Variable or integer"], amode : ywd_to_mjd(++, ?)]).

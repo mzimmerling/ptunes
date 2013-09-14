@@ -1,0 +1,49 @@
+:- module(hash).
+:- export hash_create / 1.
+:- export hash_add / 3.
+:- export hash_remove / 3.
+:- export hash_find / 3.
+:- export hash_contains / 2.
+:- export hash_count / 2.
+:- export hash_delete / 2.
+:- export hash_erase / 1.
+:- export hash_get / 3.
+:- export hash_set / 3.
+:- export hash_iter / 2.
+:- export hash_next / 4.
+:- export hash_last / 1.
+:- export hash_keys / 2.
+:- export hash_list / 3.
+:- export hash_stat / 1.
+:- export hash_update / 4.
+:- export hash_clone / 2.
+:- export hash_entry / 3.
+:- export hash_insert_suspension / 3.
+:- export hash_terminate_suspensions / 1.
+:- export portray(hash_table / 7, hash_display / 2, []).
+:- export hash_display / 2.
+:- comment(categories, ["Data Structures"]).
+:- comment(summary, "Hash table library").
+:- comment(author, "Stefano Novello, IC-Parc").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:37 $").
+:- comment(hash_add / 3, [amode : (hash_add(+, ++, +) is det), args : ["Table" : "A hash table", "Key" : "a ground term", "Value" : "Any term"], see_also : [hash_set / 3], summary : "A synonym for hash_set/3"]).
+:- comment(hash_contains / 2, [amode : (hash_contains(+, ++) is semidet), args : ["Table" : "A hash table", "Key" : "a ground term"], summary : "Succeeds if there is an entry stored under key Key", see_also : [hash_get / 3, hash_list / 3], fail_if : "No entry for Key"]).
+:- comment(hash_count / 2, [amode : (hash_count(+, -) is det), args : ["Table" : "A hash table", "Count" : "A variable or number"], summary : "Returns the number of entries in the table", see_also : [hash_create / 1, hash_list / 3]]).
+:- comment(hash_create / 1, [amode : (hash_create(-) is det), args : ["Table" : "A variable"], see_also : [hash_set / 3, hash_get / 3, hash_erase / 1], summary : "Creates a new hash table"]).
+:- comment(hash_delete / 2, [amode : (hash_delete(+, ++) is det), args : ["Table" : "Hash table", "Key" : "a ground term"], summary : "Remove the entry with key Key (if any)", see_also : [hash_remove / 3, hash_erase / 1]]).
+:- comment(hash_entry / 3, [amode : (hash_entry(+, -, -) is nondet), amode : (hash_entry(+, ++, -) is semidet), args : ["Table" : "A hash table", "Key" : "a term", "Value" : "a term"], fail_if : "No entry for Key", summary : "Succeeds if Key and Value are an entry in table", desc : html("\n\tLike hash_get/3, but allows the Key to be uninstantiated, in which\n\tcase all hash table entries will be enumerated on backtracking.\n    "), see_also : [hash_get / 3, hash_list / 3]]).
+:- comment(hash_erase / 1, [amode : (hash_erase(+) is det), args : ["Table" : "Hash table"], summary : "Remove all entries in the hash table", see_also : [hash_create / 1, hash_delete / 2]]).
+:- comment(hash_find / 3, [amode : (hash_find(+, ++, -) is semidet), args : ["Table" : "A hash table", "Key" : "a ground term", "Value" : "Any term"], summary : "A synonym for hash_get/3", see_also : [hash_get / 3], fail_if : "No entry for Key"]).
+:- comment(hash_get / 3, [amode : (hash_get(+, ++, -) is semidet), args : ["Table" : "A hash table", "Key" : "a ground term", "Value" : "Any term"], summary : "Find the entry stored under key Key and return its value", see_also : [hash_create / 1, hash_set / 3, hash_list / 3, hash_contains / 2, hash_update / 4], fail_if : "No entry for Key"]).
+:- comment(hash_insert_suspension / 3, [amode : (hash_insert_suspension(+, +, -) is det), args : ["Table" : "Hash table", "Susp" : "A suspension", "Notifications" : "A receive port, see library(notify_ports)"], summary : "Attach a suspension to be woken on hash table modifications", desc : html("\n        Attach a suspension Susp to the hash table Table such that it gets\n\twoken whenever the table changes (i.e. when entries are added, changed\n\tor removed).\n\t<p>\n\tThe suspended goal would typically be a demon (because it is going to\n\tbe woken repeatedly, on every change). hash_insert_suspension/3 also\n\tsupplies a Notifications argument, which should be used as one of the\n\targuments of the suspended goal (see example). This is a \"receive\n\tport\" as defined by library(notify_ports), and is used to convey\n\tinformation about the changes that happened to the hash table.\n\tThe notifications are of the following form:\n\t<dl>\n\t<dt>add(Key,Value)</dt>             <dd>if a table entry was added</dd>\n\t<dt>chg(Key,OldValue,NewValue)</dt> <dd>if a table entry was modified</dd>\n\t<dt>rem(Key,OldValue)</dt>          <dd>if a table entry was removed</dd>\n\t</dl>\n\tNote that the suspensions will be always be woken <B>after</B> the hash\n\ttable has changed, so they will see the new state when they wake up.\n    "), see_also : [hash_terminate_suspensions / 1, notify_ports : receive_notifications / 3, notify_ports : foreachnotification / 6, library(notify_ports), (demon) / 1], eg : "\n    % Program:\n\n\thash_create_verbose(H) :-\n\t    hash_create(H),\n\t    make_suspension(report(Notifications,Susp), 2, Susp),\n\t    hash_insert_suspension(H, Susp, Notifications).\n\n\t:- demon(report/2).\n\treport(Notifications, Susp) :-\n\t    notify_ports:receive_notifications(Notifications, List, Status),\n\t    writeln(changes:List),\n\t    ( Status = closed -> kill_suspension(Susp) ; true ).\n\n\n    % Sample execution\n\n    ?- hash_create_verbose(H),\n       hash_set(H,k1,v1), hash_set(H,k1,v2), hash_delete(H,k1),\n       hash_terminate_suspensions(H).\n    changes : [add(k1, v1)]\n    changes : [chg(k1, v1, v2)]\n    changes : [rem(k1, v2)]\n    changes : []\n\n    H = hash(4, 0, [])\n    Yes (0.00s cpu)\n    "]).
+:- comment(hash_iter / 2, [amode : (hash_iter(+, -) is det), args : ["Table" : "A hash table", "Iter" : "Hash table iterator structure (output)"], summary : "Create an iterator to traverse the hash table", desc : html("\n\tCreate an iterator to traverse the hash table. Note that the\n\thash table should not be modified while the iterator is used,\n\totherwise the behaviour is undefined."), see_also : [hash_next / 4, hash_last / 1, hash_list / 3]]).
+:- comment(hash_keys / 2, [amode : (hash_keys(+, -) is det), args : ["Table" : "A hash table", "Keys" : "a variable or list"], summary : "Retrieve the current hash table keys", desc : html("\n\tRetrieve the hash table keys in the form of a list of Keys.\n\tThis list is cached by the hash table and only recomputed when\n\tthe table has changed.")]).
+:- comment(hash_last / 1, [amode : (hash_last(+) is semidet), args : ["Iter" : "Hash table iterator structure"], summary : "Succeeds if the iterator has reached the end of the table", fail_if : "There are further table entries left in the iteration", see_also : [hash_iter / 2, hash_next / 4, hash_list / 3]]).
+:- comment(hash_list / 3, [amode : (hash_list(+, -, -) is det), args : ["Table" : "A hash table", "Keys" : "a variable or list", "Values" : "variable or list"], summary : "Retrieve the hash table contents", desc : html("\n\tRetrieve the hash table contents in the form of a list of Keys\n\tand a list of Values. These lists are cached by the hash table\n\tand only recomputed when the table has changed.")]).
+:- comment(hash_next / 4, [amode : (hash_next(+, -, -, -) is semidet), args : ["Iter" : "Hash table iterator structure", "Key" : "A ground term (output)", "Value" : "A term (output)", "Iter" : "Hash table iterator structure (output)"], summary : "Get the next Key - Value pair according to the iterator", fail_if : "No further entries left in this iteration", see_also : [hash_iter / 2, hash_last / 1, hash_list / 3]]).
+:- comment(hash_remove / 3, [amode : (hash_remove(+, ++, -) is semidet), args : ["Table" : "A hash table", "Key" : "a ground term", "Value" : "Any term"], summary : "Remove the entry with key Key and retrieve its value Value", see_also : [hash_get / 3, hash_delete / 2, hash_erase / 1], fail_if : "No entry for Key"]).
+:- comment(hash_set / 3, [amode : (hash_set(+, ++, +) is det), args : ["Table" : "A hash table", "Key" : "a ground term", "Value" : "Any term"], see_also : [hash_get / 3, hash_update / 4], summary : "Add an (or modify the existing) entry with key Key and value Value to the hash table"]).
+:- comment(hash_stat / 1, [amode : (hash_stat(+) is det), args : ["Table" : "A hash table"], summary : "Prints statistics about the hash table", see_also : [hash_create / 1]]).
+:- comment(hash_terminate_suspensions / 1, [amode : (hash_terminate_suspensions(+) is det), args : ["Table" : "Hash table"], summary : "Wake and terminate all suspensions attached to the hash table", desc : html("Wake all suspensions attached to the hash table and close the\n    \tcorresponding notification port. This informs the suspended goals that\n\tthere will be no further notifications, and gives them the opportunity\n\tto clean themselves up.  This should normally be done once the hash\n\ttable will no longer be used (or modified).\n    "), see_also : [hash_create / 1, hash_insert_suspension / 3], eg : "see hash_insert_suspension/3"]).
+:- comment(hash_update / 4, [amode : (hash_update(+, ++, -, +) is semidet), args : ["Table" : "A hash table", "Key" : "a ground term", "OldValue" : "Any term", "NewValue" : "Any term"], summary : "Lookup and replace the value stored under Key", desc : "A combination of hash_get/3 and hash_set/3, but more efficient\n    \tbecause there is only one hash lookup.", eg : "\n\t?- hash_create(H),\n\t   hash_set(H, k, hello),\n\t   hash_update(H, k, Old, world),\n\t   hash_get(H, k, New).\n\n\tOld = hello\n\tNew = world\n\tYes (0.00s cpu)\n\n\t% sample code based on hash_update/4:\n    \thash_inc(H, Key) :-\n\t    hash_update(H, Key, N0, N1),\n\t    N1 is N0+1.\n\n    \thash_addto(H, Key, Value) :-\n\t    hash_update(H, Key, Values, [Value|Values]).\n    ", see_also : [hash_get / 3, hash_set / 3], fail_if : "No entry for Key"]).

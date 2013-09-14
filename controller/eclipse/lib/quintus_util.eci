@@ -1,0 +1,4 @@
+:- module(quintus_util).
+:- export q_prompt / 2.
+:- export redef_handler / 2.
+:- export end_compile_handler / 2.

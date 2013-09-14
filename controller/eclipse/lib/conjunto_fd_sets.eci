@@ -1,0 +1,23 @@
+:- module(conjunto_fd_sets).
+:- reexport fd_sets except (::) / 2.
+:- export macro({} / 1, tr_slists / 2, []).
+:- export macro({} / 0, tr_slists / 2, []).
+:- export tr_slists / 2.
+:- export list2set / 2.
+:- export set2list / 2.
+:- export op(700, xfx, `<>).
+:- export op(700, xfx, `=).
+:- export op(700, xfx, `::).
+:- export op(700, xfx, `<).
+:- export `<> / 2.
+:- export `= / 2.
+:- export `< / 2.
+:- export `:: / 2.
+:- export refine / 1.
+:- comment(categories, ["Compatibility", "Constraints"]).
+:- comment(summary, "lib(conjunto) compatibility wrapper for lib(fd_sets)").
+:- comment(author, "Joachim Schimpf").
+:- comment(date, "$Date: 2009/02/19 05:45:20 $").
+:- comment(copyright, "Cisco Systems, Inc.").
+:- comment(desc, html("<P>\n    This is a wrapper for library(fd_sets) to make it more backward\n    compatible with its predecessor, the set solver library(conjunto).\n    Supported are:\n    <UL>\n    <LI>the curly-bracket syntax for sets (input only)\n    <LI>the backquote-syntax for several constraints (`&lt;&gt;,`&lt;,`::,`=)\n    <LI>refine/1\n    </UL>\n    Not supported are:\n    <UL>\n    <LI>non-integer set elements\n    <LI>el_weight/2, sum_weight/2 (but see fd_sets:weight/2)\n    <LI>max_weight/2 (but see fd_sets:insetdomain/4)\n    </UL>\n</P>")).
+:- comment(refine / 1, [summary : "Instantiate Set to a possible value", template : "refine(?Set)", resat : yes, see_also : [insetdomain / 4], desc : html("\n    Instantiate Set to a possible value. The predicate backtracks over\n    all possible set instantiations. refine/1 is a special instance of\n    the more general insetdomain/4 predicate, and is defined as\n<PRE>\n    refine(Set) :-\n    \tinsetdomain(Set, any, small_first, in_notin).\n</PRE>\n")]).

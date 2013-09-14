@@ -1,0 +1,83 @@
+:- module(ech).
+:- export op(1100, fy, handler).
+:- export op(1000, fy, constraints).
+:- export op(1190, xfx, [==>, <=>]).
+:- export op(1200, xfx, ::=).
+:- export op(1100, xfx, |).
+:- export op(1100, xfx, \).
+:- export op(700, xfx, flag).
+:- export record_chrrule / 3.
+:- export record_chrprule / 3.
+:- export new_constraints / 3.
+:- export ignore_handler / 2.
+:- export record_namedrule / 3.
+:- export appliedpos / 2.
+:- export suspendindexpos / 2.
+:- export constraintnumpos / 2.
+:- export wrapperinpos / 2.
+:- export cdeletethreshold / 2.
+:- tool(record_namedrule / 2, record_namedrule / 3).
+:- tool(record_chrrule / 2, record_chrrule / 3).
+:- tool(record_chrprule / 2, record_chrprule / 3).
+:- tool(new_constraints / 2, new_constraints / 3).
+:- export suspend_constraint / 4.
+:- export get_global_constraint / 2.
+:- export get_constraint_list / 3.
+:- export kill_constraint / 2.
+:- export check_pairapplied / 6.
+:- export check_pairapplied_direct / 6.
+:- export insert_pairapplied / 6.
+:- export is_in_store / 2.
+:- export create_applied / 2.
+:- export check_samepairapplied / 6.
+:- export insert_samepairapplied / 6.
+:- export check_samepairapplied_direct / 6.
+:- export check_samepairapplied_directmarked / 8.
+:- export check_pairapplied_directmarked / 8.
+:- export find_partner / 4.
+:- export in_chrstore / 2.
+:- export chr_get_gconstraint / 2.
+:- export chr_get_vconstraint / 3.
+:- export chr / 1.
+:- export chr / 2.
+:- export in_chrstore / 1.
+:- export option / 2.
+:- export option / 3.
+:- export chr_get_constraint / 1.
+:- export chr_get_constraint / 2.
+:- export constraints / 1.
+:- export constraints / 2.
+:- export handler / 1.
+:- tool(suspend_constraint / 4, suspend_constraint / 5).
+:- tool(get_global_constraint / 2, get_global_constraint / 3).
+:- tool(get_constraint_list / 3, get_constraint_list / 4).
+:- tool(kill_constraint / 2, kill_constraint / 3).
+:- tool(check_pairapplied / 6, check_pairapplied / 7).
+:- tool(insert_pairapplied / 6, insert_pairapplied / 7).
+:- tool(check_samepairapplied / 6, check_samepairapplied / 7).
+:- tool(insert_samepairapplied / 6, insert_samepairapplied / 7).
+:- tool(check_pairapplied_directmarked / 8, check_pairapplied_directmarked / 9).
+:- tool(check_samepairapplied_directmarked / 8, check_samepairapplied_directmarked / 9).
+:- tool(chr / 1, chr / 2).
+:- tool(in_chrstore / 1, in_chrstore / 2).
+:- tool(option / 2, option / 3).
+:- tool(constraints / 1, constraints / 2).
+:- tool(chr_get_constraint / 1, chr_get_gconstraint / 2).
+:- tool(chr_get_constraint / 2, chr_get_vconstraint / 3).
+:- export macro(handler / 2, ignore_handler / 3, [clause]).
+:- export macro(==> / 2, record_chrprule / 3, [clause]).
+:- export macro(<=> / 2, record_chrrule / 3, [clause]).
+:- export macro(::= / 2, record_namedrule / 3, [clause]).
+:- export macro(constraints / 1, new_constraints / 3, [clause]).
+:- export macro(constraint_in_wrapper_pos / 0, realconstraintpos / 2, []).
+:- export macro(suspendid_pos / 0, suspendindexpos / 2, []).
+:- export macro(constraintnum_pos / 0, constraintnumpos / 2, []).
+:- export macro(applied_pos / 0, appliedpos / 2, []).
+:- export macro(wrapper_inpos / 0, wrapperinpos / 2, []).
+:- export macro(cdelete_threshold / 0, cdeletethreshold / 2, []).
+:- comment(categories, ["Constraints", "Techniques"]).
+:- comment(summary, "Extended constraint handling rules library").
+:- comment(desc, html("   This library allows the user to write constraint handling rules (CHR) in \n   their ECLiPSe programs. CHR is a high-level language extension for writing\n   user-defined constraints, allowing for rapid prototyping of constraints.\n<P>\n   This library provides some extensions over the older chr library: \n<UL>\n    <LI> support for multi (>2) headed simplification and simpagation rules\n\n    <LI> cleanup of semantics and syntax of CHRs\n\n    <LI> faster execution\n\n    <LI> more convenient compilation and mixing with ECLiPSe code\n</UL>\n   CHRs are compiled by source-to-source transformation into ECLiPSe code that\n   make calls to many ech library predicates that implements the CHR \n   functionality. Thus, most exported predicates predicates  are not intended\n   to be used by the user directly, and are not documented.\n")).
+:- comment(constraints / 1, [summary : "Directive for declaring SpecList to be CHR constraints", amode : constraints(+), args : ["SpecList" : "Sequence of the form Atom/Integer, or Atom/Integer:PrioSpec"], eg : "   :- constraints leq/2.\n   :- op(700, xfx, leq).\n\n   X leq Y <=> \\+nonground(X), \\+nonground(Y) | X @=< Y.\n   X leq X <=> true.\n", desc : html("   Declares the predicates specified in SpecList as CHR constraints. This \n   allows the predicate to appear in the head of a CHR rule. A constraint\n   can be follwed by a priority specification PrioSpec, which can be one of:\n<P>\n      1. at_lower(++N) 2. at_higher(++N) 3. at_absolute_priority(++N)\n<P>\n   where N is an integer. This specifies the priority the CHR rules will be\n   executed at if the specified constraint is the active constraint.\n   at_lower and at_higher specifies that the priority is N lower or higher\n   than the default CHR priority, and for at_absolute_priority, it is the\n   actual priority. \n<P>\n   Note that a predicate declared as a CHR constraint should not appear as\n   a normal ECLiPSe predicate. Any such definition of the predicate in the\n   user's program would be replaced by the CHR definition.\n")]).
+:- comment(in_chrstore / 1, [summary : "Test if CHRConst is in the CHR constraint store or not", amode : in_chrstore(+), args : ["CHRConst" : "A CHR constraint"], eg : "    X leq Y, Y leq Z ==> \\+in_chrstore(X leq Z)| X leq Z.\n", desc : html("  This predicate is used to test if a particular CHR constraint is in the\n  CHR constraint store or not. It can be used to prevent the addition of\n  redundant constraints. This only useful if the 'already_in_store' \n  option is off. \n")]).
+:- comment(option / 2, [summary : "Specify options for controlling ech compilation", amode : option(++, ++), args : ["Option" : "Option Name (Atom)", "On_or_Off" : "If Option should be on ('on') or off ('off'), or an integer between 1 and 11"], desc : html("   Allows the user to set options that affect the way the CHRs are compiled.\n   These options can be turned on or off, with the default state being on.\n   The options controls if certain run-time safety checks are performed or\n   not. With the option off, the associated safety check will not be generated\n   for the CHR code when compiled. Such code can run more efficiently, but\n   can lead to incorrect behaviour that the checks would have been able to\n   prevent.\n   \n<DL>\n     <DT>check_guard_bindings\n          <DD> When executing a guard in a CHR rule, checks are performed\n          so that if a guard goal attemps to touch a global variable (i.e. a\n          variable which occurs in the rule head), the guard will fail. With\n          this option set to `off', then the checks are not performed.\n\n     <DT>already_in_store\n          <DD> Before adding a user-defined CHR constraint to the constraint\n          store, a check is performed to see if the particular constraint\n          (i.e. with exactly the same variables) is already in the store.\n          If this option is set to `off', then the check is not performed.\n          The user can explicitly check if a constraint is in store by the\n          in_chrstore/1 predicate.\n\n     <DT>chr_priority\n          <DD> On_or_Off is an integer between 1 and 11, specifying the\n          default priority for CHR constraints generated by the compiler.\n          It also specifies the priority that at_lower/at_higher\n          declarations will be calculated from in the constraints/1\n          declarations. Note that all priorities are determined at the\n          point of the constraint declaration and is not affected by any\n          subsequent changes in chr_priority.\n\n</DL>\n")]).

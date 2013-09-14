@@ -1,0 +1,14 @@
+:- module(xref).
+:- export xref / 2.
+:- tool(xref / 2, xref_ / 3).
+:- export saros_xref / 2.
+:- export call_graph / 3.
+:- tool(call_graph / 3, call_graph / 4).
+:- comment(categories, ["Development Tools"]).
+:- comment(summary, "Cross-referencing tool").
+:- comment(author, "Joachim Schimpf, IC-Parc").
+:- comment(copyright, "Cisco Systems, Inc.").
+:- comment(date, "$Date: 2009/02/19 06:09:22 $").
+:- comment(desc, html("\n    This library analyses an ECLiPSe source module or file and build\n    a call graph. The graph can either be returned in the format of\n    lib(graph_algorithms), or output in different ways.\n    ")).
+:- comment(call_graph / 3, [summary : "Compute a call graph for a source module file", args : ["File" : "Name of the source file (atom or string)", "Graph" : "Variable, returns a graph structure", "Options" : "A list of Option:Value structures"], amode : call_graph(+, -, +), desc : html("\n    Computes a call graph for the given source file. The graph is in the\n    format defined by lib(graph_algorithms).  The relevant options are:\n<DL>\n    <DT>builtins ('off' or 'on')</DT>\n\t<DD>selects whether to include built-in predicates or not. Default: off.</DD>\n</DL>\n    "), see_also : [xref / 2, library(graph_algorithms)]]).
+:- comment(xref / 2, [summary : "Display a call graph for a source module file", args : ["File" : "Name of the source file (atom or string)", "Options" : "A list of Option:Value structures"], amode : xref(+, +), desc : html("\n    Computes a call graph for the given source file and displays it.\n    The possible options are:\n<DL>\n    <DT>builtins ('off' or 'on')</DT>\n\t<DD>selects whether to show built-in predicates or not. Default: off.</DD>\n    <DT>output ('text', 'graphviz', graphviz(Options), 'daVinci' or file(File))</DT>\n\t<DD>selects how to show the results. 'text' is a for a simple textual\n\tlisting on the output stream, file(File) writes text output into\n\tthe specified file, 'daVinci' uses the daVinci graph drawing library,\n\t'graphviz' uses the graphviz graph drawing library. Default: text.</DD>\n    <DT>relation ('calls' or 'called_by')</DT>\n\t<DD>selects whether to print the 'calls' relation or it inverse,\n\tthe 'called_by' relation. Default: calls.</DD>\n</DL>\n    "), see_also : [call_graph / 3]]).

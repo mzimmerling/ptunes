@@ -1,0 +1,22 @@
+:- module(toplevel).
+:- export toplevel_init / 1.
+:- export toplevel / 0.
+:- export break / 0.
+:- export toplevel_prompt / 2.
+:- export print_values / 3.
+:- export tty_ask_more / 2.
+:- export tty_banner / 2.
+:- export start_break / 3.
+:- export end_break / 3.
+:- export delayed_goals_handler / 3.
+:- export write_history / 0.
+:- comment(categories, ["Development Tools"]).
+:- comment(summary, "Interactive ECLiPSe toplevel interpreter").
+:- comment(date, "$Date: 2010/06/10 00:12:22 $").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(author, "Joachim Schimpf, IC-Parc").
+:- comment(desc, html("\n\tNote that this library is normally loaded automatically\n\tby the ECLiPSe development environment.\n    ")).
+:- comment(break / 0, [summary : "A new invocation of a top level loop is called as a subgoal", desc : html("\n    Used to start a new invocation of the top level loop.  Compiled\n    procedures and event handler redefinitions remain valid within the new\n    invocation level.  Exiting with a Control-D (or end_of_file) or\n    calling exit_block(end) will return the control to the previous level.\n    "), args : [], resat : "   No.", fail_if : "   None.\n\n", eg : "\n[eclipse]: [user].\n go:- writeln(\"**** Enter prolog goals and press ^D\"),\n      break,\n      writeln(\"**** Execution continues...\").\n user compiled 144 bytes in 0.02 seconds\n\nyes.\n[eclipse]: go.\n**** Enter prolog goals and press ^D\n\nEntering break level 1\n[eclipse]: date(X).\n\nX = \"Wed Aug  9 12:21:48 1989\\n\"\nyes.\n[eclipse]: ^D\n\nLeaving break level 1\n**** Execution continues...\n\nyes.\n[eclipse]:\n", see_also : [toplevel / 0, exit_block / 1]]).
+:- comment(toplevel / 0, [summary : "Run a toplevel interpreter", desc : html("\n    \tRun a toplevel query interpreter. This is a program that\n\tallows to input ECLiPSe queries, runs them, and displays\n\tthe results. Which variant of this interpreter is invoked\n\tdepends on how it was initialized in toplevel_init/1.\n    "), see_also : [toplevel_init / 1, break / 0]]).
+:- comment(toplevel_init / 1, [summary : "Initialize a toplevel", args : ["Type" : "one of the atoms 'tty' or 'gui'"], desc : html("\n    \tInitializes streams and event handlers in preparation to\n\ta call to toplevel/0. Two variants of toplevel loop can be\n\tselected: command line oriented (tty) or server oriented\n\t(gui). The latter is intended for an ECLiPSe which is\n\tembedded or remote-interfaced to a GUI-based host program.\n    "), see_also : [toplevel / 0, break / 0]]).
+:- comment(write_history / 0, [template : "write_history", summary : "Writes the current command history into the .eclipse_history file"]).

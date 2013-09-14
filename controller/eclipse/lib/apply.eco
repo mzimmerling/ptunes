@@ -1,0 +1,6 @@
+:-(module(apply)).
+:-(export(/(apply,2))).
+:-(export(/(apply_,3))).
+:-(export(syntax_option(var_functor_is_apply))).
+:-(tool(/(apply,2),/(apply_,3))).
+:-(:(sepia_kernel,store_pred(/(apply_,3),[](o(6),pw(5),a(3),y(1),o(124),a(1),ref(19),ref(19),ref(19),ref(19),ref(19),ref(19),ref(19),ref(19),ref(19),ref(55),ref(19),ref(55),ref(19),o(3),a(2),y(4),o(399),a(2),y(5),proc(/(=..,2)),51,o(285),a(3),y(3),o(353),y(5),a(1),y(4),a(2),o(143),proc(/(append,3)),11,o(285),a(1),y(2),o(395),y(3),a(2),proc(/(=..,2)),7,o(353),y(2),a(1),y(1),a(2),o(145),proc(:(sepia_kernel,/(untraced_call,2))),o(300),a(1),o(2),a(2),a(3),o(106),a(2),o(79),a(1),o(79),a(3),o(399),a(1),y(2),proc(/(=..,2)),7,o(353),y(2),a(1),y(1),a(2),o(145),proc(:(sepia_kernel,/(untraced_call,2))),o(0)),77,0,0,'Kernel/lib/apply.pl',0,0))).

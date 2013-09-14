@@ -1,0 +1,12 @@
+:- module(apply).
+:- export apply / 2.
+:- export apply_ / 3.
+:- export syntax_option(var_functor_is_apply).
+:- tool(apply / 2, apply_ / 3).
+:- comment(categories, ["Algorithms"]).
+:- comment(summary, "The apply/2 higher-order predicate").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(author, "Joachim Schimpf, ECRC Munich").
+:- comment(date, "$Date: 2009/02/19 05:38:36 $").
+:- comment(desc, html("\n    This library defines the apply/2 predicate which constructs a goal\n    from a term and a list of additional arguments:\n    <PRE>\n    \t?- P=plus(1), apply(P, [3,X]).\n\tP = plus(1)\n\tX = 4\n\tYes (0.00s cpu)\n    </PRE>\n    Loading this library also enables the syntax option var_functor_is_apply.\n    This means that it is allowed to write terms with variables functors,\n    which will be parsed as apply/2 terms which can the be executed.\n    The above example can thus be written as:\n    <PRE>\n    \t?- P=plus(1), P(3,X).\n\tP = plus(1)\n\tX = 4\n\tYes (0.00s cpu)\n    </PRE>\n")).
+:- comment(apply / 2, [summary : "The apply/2 higher-order predicate", args : ["Term" : "An atom or compound term", "Args" : "A list of arbitrary terms"], desc : html("\n    Invokes a goal that is formed by appending the elements of the\n    list Args as additional arguments to Term.\n    "), eg : "\n    % The following three examples all invoke the goal plus(1,2,X):\n\n    ?- apply(plus, [1,2,X]).\n    X = 3\n\n    ?- apply(plus(1), [2,X]).\n    X = 3\n\n    ?- apply(plus(1,2), [X]).\n    X = 3\n\n\n    % Error:\n\n    ?- apply(plus(1),[2]).\n    calling an undefined procedure plus(1, 2) in module eclipse\n    Abort\n    "]).

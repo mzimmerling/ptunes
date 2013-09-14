@@ -1,0 +1,12 @@
+:-(module(empty_language,[],[sepia_kernel])).
+:-(reexport(from(/(comment,2),sepia_kernel))).
+:-(reexport(from(/(local,1),sepia_kernel))).
+:-(reexport(from(/(export,1),sepia_kernel))).
+:-(reexport(from(/(import,1),sepia_kernel))).
+:-(reexport(from(/(writeln,2),sepia_kernel))).
+:-(reexport(from(/(ensure_loaded,1),sepia_kernel))).
+:-(reexport(from(/(current_module,1),sepia_kernel))).
+:-(reexport(from(/(true,0),sepia_kernel))).
+:-(reexport(from(/(create_module,3),sepia_kernel))).
+:-(reexport(from(/(->,2),sepia_kernel))).
+:-(reexport(from(/(;,2),sepia_kernel))).

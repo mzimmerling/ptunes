@@ -1,0 +1,62 @@
+:- module(test_util).
+:- export op(1110, xfx, should_give).
+:- export op(1110, xf, should_fail).
+:- export op(1110, xfx, should_throw).
+:- export op(1110, xfx, should_raise).
+:- export test / 2.
+:- export test / 1.
+:- export test_info / 2.
+:- export should_give / 2.
+:- export should_fail / 1.
+:- export should_throw / 2.
+:- export should_raise / 2.
+:- export should_give / 3.
+:- export should_fail / 2.
+:- export should_throw / 3.
+:- export should_raise / 3.
+:- export get_failed_test_count / 1.
+:- export make_integer / 1.
+:- export make_float / 1.
+:- export make_rational / 1.
+:- export make_bignum / 1.
+:- export make_interval / 1.
+:- export make_neginteger / 1.
+:- export make_negfloat / 1.
+:- export make_negrational / 1.
+:- export make_negbignum / 1.
+:- export make_neginterval / 1.
+:- export make_atom / 1.
+:- export make_nil / 1.
+:- export make_string / 1.
+:- export make_struct / 1.
+:- export make_list / 1.
+:- export make_var / 1.
+:- tool(should_give / 2, should_give_body / 3).
+:- tool(should_fail / 1, should_fail_body / 2).
+:- tool(should_throw / 2, should_throw_body / 3).
+:- tool(should_raise / 2, should_raise_body / 3).
+:- tool(should_give / 3, should_give_body / 4).
+:- tool(should_fail / 2, should_fail_body / 3).
+:- tool(should_throw / 3, should_throw_body / 4).
+:- tool(should_raise / 3, should_raise_body / 4).
+:- tool(test_info / 2, test_info_body / 3).
+:- tool(test / 2, test_body / 3).
+:- tool(test / 1, test_body / 2).
+:- comment(categories, ["Development Tools"]).
+:- comment(summary, "Utilities for automated program tests").
+:- comment(author, "Joachim Schimpf, IC-Parc").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:37 $").
+:- comment(desc, html("\n    Use this library as follows: Write a file with test patterns, using\n    the primitives should_fail/1, should_give/2, should_throw/2 and\n    should_raise/2, e.g.\n    <PRE>\n    3.0 > 3 should_fail.\n    X is 3.0+4 should_give X=7.0.\n    exit_block(ball) should_throw ball.\n    number_string(hello,_) should_raise 5.\n    </PRE>\n    The file name should have a .tst extension, e.g. mytests.tst.\n    Then run all the test in the file by calling test(mytests).  This will\n    print a message for every test pattern that does not behave as expected.\n    The messages go to a stream called testlog (which defaults to output).\n\n    <P>\n    Alternatively, you can write a file with test patterns, using the\n    primitives should_fail/2, should_give/3, should_throw/3 and\n    should_raise/3, e.g.\n    <PRE>\n    should_fail(3.0 > 3, test_float_not_greater_than_integer).\n    should_give(X is 3.0+4, X=7.0, test_float_plus_integer_equals_float).\n    should_throw(exit_block(ball),ball,test_exit_block).\n    should_raise(number_string(hello,_),5,test_raises_5).\n    </PRE>\n    Here the extra last argument serves as a name for the test (or a short\n    description).  It can be an atom or a string and it is used to output\n    results in comma separated format to a stream called test_csv_log\n    (defaults to null), e.g. test(mytest) should output the following to\n    test_csv_log:\n    <PRE>\n    test_float_not_greater_than_integer,pass,2001-10-29,16:59:20,0.00\n    test_float_plus_integer_equals_float,pass,2001-10-29,16:59:20,0.01\n    test_exit_block,pass,2001-10-29,16:59:20,0.00\n    test_raises_5,pass,2001-10-29,16:59:20,0.00\n    </PRE>\n    The first value is the name of the test (last argument in test pattern).\n    The second value is either `pass' or `fail' indicating whether the\n    particular test was successful or not.  The third and fourth values show\n    the date and time (UTC) the test was run (in ISO 8601 format).  The last\n    value shows the CPU time taken to run the test.\n    Extra values can be appended at the head of the comma separated values\n    by using test_info/2, e.g. test_info(mytest,test_result) would change\n    the output to test_csv_log as follows:\n    <PRE>\n    test_result,test_float_not_greater_than_integer,pass,2001-10-29,16:59:20,0.00\n    test_result,test_float_plus_integer_equals_float,pass,2001-10-29,16:59:20,0.01\n    test_result,test_exit_block,pass,2001-10-29,16:59:20,0.00\n    test_result,test_raises_5,pass,2001-10-29,16:59:20,0.00\n    </PRE>\n    This can be extremely useful, as useful information as the name of the\n    module tested, the directory where it is located, the name of the host,\n    etc. can be added to the log. \n    ")).
+:- comment(get_failed_test_count / 1, [template : "get_failed_test_count(-N)", summary : "Returns the number of tests that failed.", desc : html("\n<P>\n    The test framework counts the number of tests which fail; use this\n    predicate to retrieve this number.\n    ")]).
+:- comment(should_fail / 1, [template : "+Goal should_fail", summary : "Run the goal Goal and print a message if it doesn't fail", eg : "3.0 > 3 should_fail.", see_also : [should_give / 2, should_throw / 2, should_raise / 2, should_fail / 2, should_give / 3, should_throw / 3, should_raise / 3]]).
+:- comment(should_fail / 2, [template : "should_fail(+Goal,+TestName)", summary : "Run the goal Goal and print a message if it doesn't fail", eg : "should_fail(3.0 > 3, test_float_not_greater_than_integer).", see_also : [should_give / 2, should_throw / 2, should_raise / 2, should_fail / 1, should_give / 3, should_throw / 3, should_raise / 3]]).
+:- comment(should_give / 2, [template : "+Goal should_give +CheckGoal", summary : "Run the goal Goal and print a message if the result doesn't satisfy CheckGoal", eg : "X is 3.0+4 should_give X=7.0.", see_also : [should_fail / 1, should_throw / 2, should_raise / 2, should_give / 3, should_fail / 2, should_throw / 3, should_raise / 3]]).
+:- comment(should_give / 3, [template : "should_give(+Goal,+CheckGoal,+TestName)", summary : "Run the goal Goal and print a message if the result doesn't satisfy CheckGoal", eg : "should_give(X is 3.0+4, X=7.0, test_float_plus_integer_equals_float).", see_also : [should_fail / 1, should_throw / 2, should_raise / 2, should_give / 2, should_fail / 2, should_throw / 3, should_raise / 3]]).
+:- comment(should_raise / 2, [template : "+Goal should_raise +Event", summary : "Run the goal Goal and print a message if it doesn't raise Event.", eg : "number_string(hello,_) should_raise 5.  % type error", see_also : [should_give / 2, should_fail / 1, should_throw / 2, should_raise / 3, should_give / 3, should_fail / 2, should_throw / 3]]).
+:- comment(should_raise / 3, [template : "should_raise(+Goal,+Event,+TestName)", summary : "Run the goal Goal and print a message if it doesn't raise Event.", eg : "should_raise(number_string(hello,_),5,test_raises_5). % type error", see_also : [should_give / 2, should_fail / 1, should_throw / 2, should_raise / 2, should_give / 3, should_fail / 2, should_throw / 3]]).
+:- comment(should_throw / 2, [template : "+Goal should_throw +Exception", summary : "Run the goal Goal and print a message if it doesn't throw Exception", eg : "exit_block(ball) should_throw ball.", see_also : [should_give / 2, should_fail / 1, should_raise / 2, should_throw / 3, should_give / 3, should_fail / 2, should_raise / 3]]).
+:- comment(should_throw / 3, [template : "should_throw(+Goal,+Exception,+TestName)", summary : "Run the goal Goal and print a message if it doesn't throw Exception", eg : "    should_throw(exit_block(ball),ball,test_exit_block).", see_also : [should_give / 2, should_fail / 1, should_raise / 2, should_throw / 2, should_give / 3, should_fail / 2, should_raise / 3]]).
+:- comment(test / 1, [template : "test(+File)", summary : "Runs all the test patterns in File.", see_also : [test / 2, test_info / 2, should_give / 2, should_fail / 1, should_throw / 2, should_raise / 2, should_give / 3, should_fail / 2, should_throw / 3, should_raise / 3]]).
+:- comment(test / 2, [template : "test(+File, +Option)", summary : "Runs all the test patterns in File.", desc : html("    Runs all the test patterns in File. Option is either 'call' (the default)\n    or 'compile'.\n    When 'call' is chosen, every test goal gets executed simply by metacall\n    using call/1.\n    When 'compile' is chosen, every test goal gets compiled into an auxiliary\n    predicate (with all compile-time transformations applied), which in turn\n    is then executed.\n    "), see_also : [test_info / 2, should_give / 2, should_fail / 1, should_throw / 2, should_raise / 2, should_give / 3, should_fail / 2, should_throw / 3, should_raise / 3]]).
+:- comment(test_info / 2, [template : "test_info(+File,+Info)", summary : "Runs all the test patterns in File, printing the Info string in test_csv_log.", see_also : [test / 1, should_give / 2, should_fail / 1, should_throw / 2, should_raise / 2, should_give / 3, should_fail / 2, should_throw / 3, should_raise / 3]]).

@@ -1,0 +1,88 @@
+:- module(iso).
+:- reexport eclipse_language except floor / 2, ceiling / 2, round / 2, truncate / 2, (abolish) / 1, get_char / 1, get_char / 2.
+:- export op(0, xfx, of).
+:- export op(0, xfx, with).
+:- export op(0, xfy, do).
+:- export op(0, xfx, @).
+:- export op(0, fx, -?->).
+:- export macro((with) / 2, (=) / 2, []).
+:- export macro((of) / 2, (=) / 2, []).
+:- export syntax_option(iso_escapes).
+:- export syntax_option(iso_base_prefix).
+:- export syntax_option(doubled_quote_is_quote).
+:- export syntax_option(no_array_subscripts).
+:- export syntax_option(bar_is_no_atom).
+:- export syntax_option(no_attributes).
+:- export syntax_option(no_curly_arguments).
+:- export syntax_option(blanks_after_sign).
+:- export syntax_option(limit_arg_precedence).
+:- export chtab(96, string_quote).
+:- export chtab(34, list_quote).
+:- export op(200, xfx, **).
+:- export ** / 3.
+:- export (abolish) / 1.
+:- export at_end_of_stream / 0.
+:- export at_end_of_stream / 1.
+:- export atom_concat / 3.
+:- export atom_codes / 2.
+:- export atom_chars / 2.
+:- export catch / 3.
+:- export catch / 4.
+:- export ceiling / 2.
+:- export char_conversion / 2.
+:- export close / 2.
+:- export current_char_conversion / 2.
+:- export current_input / 1.
+:- export current_output / 1.
+:- export current_prolog_flag / 2.
+:- export float_integer_part / 2.
+:- export float_fractional_part / 2.
+:- export floor / 2.
+:- export flush_output / 0.
+:- export flush_output / 1.
+:- export get_byte / 1.
+:- export get_byte / 2.
+:- export get_char / 1.
+:- export get_char / 2.
+:- export get_code / 1.
+:- export get_code / 2.
+:- export halt / 1.
+:- export initialization / 1.
+:- export iso_recover / 4.
+:- export log / 2.
+:- export number_chars / 2.
+:- export number_codes / 2.
+:- export peek_byte / 1.
+:- export peek_byte / 2.
+:- export peek_char / 1.
+:- export peek_char / 2.
+:- export peek_code / 1.
+:- export peek_code / 2.
+:- export put_byte / 1.
+:- export put_byte / 2.
+:- export put_code / 1.
+:- export put_code / 2.
+:- export round / 2.
+:- export set_input / 1.
+:- export set_output / 1.
+:- export set_prolog_flag / 2.
+:- export set_stream_position / 2.
+:- export sign / 2.
+:- export stream_property / 2.
+:- export sub_atom / 5.
+:- export throw / 1.
+:- export truncate / 2.
+:- export unify_with_occurs_check / 2.
+:- tool(catch / 3, catch / 4).
+:- tool(initialization / 1, initialization / 2).
+:- tool(current_prolog_flag / 2, current_prolog_flag_ / 3).
+:- tool(set_prolog_flag / 2, set_prolog_flag_ / 3).
+:- reexport multifile.
+:- tool((abolish) / 1, abolish_ / 2).
+:- comment(categories, ["Compatibility"]).
+:- comment(summary, "ISO Prolog compatibility library").
+:- comment(author, "Joachim Schimpf, ECRC and IC-Parc").
+:- comment(copyright, 'Cisco Systems, Inc').
+:- comment(date, "$Date: 2009/12/11 10:42:32 $").
+:- comment(see_also, [library(multifile)]).
+:- comment(desc, html('\n    This library provides a reasonable degree of compatibility with\n    the definition of Standard Prolog as defined in ISO/IEC 13211-1\n    (Information Technology, Programming Languages, Prolog, Part 1: \n    General Core, 1995).  The areas where the library is not fully\n    compiant are I/O and exception handling.  However it should be\n    sufficient for most applications.  The library is provided in\n    source form.\n    <P>\n    The effect of the compatibility library is local to the module where\n    it is loaded. For maximal ISO-compatibility, an ISO-program should\n    be contained in a  separate module starting with a directive like\n    <PRE>\n    :- module(myisomodule, [], iso).\n    </PRE>\n    In this case, Eclipse-specific language constructs will not be available.\n    <P>\n    If the compatibility package is loaded into a standard module, e.g. like\n    <PRE>\n    :- module(mymixedmdule).\n    :- use_module(library(iso)).\n    </PRE>\n    then ISO and Eclipse language features can be used together. However,\n    ambiguities must be resolved explicitly and confusion may arise from\n    the different meaning of quotes in Eclipse vs ISO.\n    <P>\n    The recommended way is therefore the former one, ie to put code written\n    in different language dialects into different modules.')).

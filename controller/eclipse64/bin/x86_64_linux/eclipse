@@ -1,0 +1,9 @@
+#! /bin/sh
+ECLIPSEDIR="${ECLIPSEDIR:-/home/user/optimizeMac/code/controller/eclipse64}"
+LD_LIBRARY_PATH="$ECLIPSEDIR/lib/x86_64_linux:/usr/local/lib:$LD_LIBRARY_PATH"
+TCL_LIBRARY="${TCL_LIBRARY:-}"
+TK_LIBRARY="${TK_LIBRARY:-}"
+DAVINCIHOME="${DAVINCIHOME:-$ECLIPSEDIR/daVinci/x86_64_linux}"
+JRE_HOME="${JRE_HOME:-/usr/lib/jvm/java-6-openjdk}"
+export ECLIPSEDIR TCL_LIBRARY TK_LIBRARY  LD_LIBRARY_PATH DAVINCIHOME JRE_HOME
+exec "/home/user/optimizeMac/code/controller/eclipse64/lib/x86_64_linux/eclipse.exe" "$@"

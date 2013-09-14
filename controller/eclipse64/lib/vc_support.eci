@@ -1,0 +1,29 @@
+:- module(vc_support).
+:- export viewable_create / 4.
+:- export viewable_create / 3.
+:- export viewable_create / 2.
+:- export viewable / 1.
+:- export viewable_size / 2.
+:- export viewable_type / 2.
+:- export viewable_expand / 3.
+:- export viewable_expand / 4.
+:- export viewable_element / 3.
+:- export viewable_element_to_string / 2.
+:- export viewable_element_execute / 3.
+:- export viewable_changeable_execute / 4.
+:- export viewable_get_location_name / 4.
+:- export viewable_get_location_names / 3.
+:- export vis_client_register / 4.
+:- export vis_client_unregister / 1.
+:- export vis_client_request_termination / 1.
+:- export vis_client_interest_modify / 5.
+:- export vis_client_breakpoint / 0.
+:- comment(categories, ["Development Tools", "Visualisation"]).
+:- comment(summary, "Library to support implementation of visualisation clients").
+:- comment(author, "Josh Singer").
+:- comment(copyright, "Cisco Systems, Inc.").
+:- comment(desc, html("\n\n           <P> This library should be used if you intend to implement a \n           new visualisation client. It should not be used for anything \n           else. \n\n           <P> Viewables are made up of <EM>viewable elements</EM>. A\n           particular viewable element can accessed using\n           <CODE>viewable_element/3</CODE>.\n\n")).
+:- comment(viewable_changeable_execute / 4, [amode : viewable_changeable_execute(++, ++, ?, ++), args : ["ViewableName" : "Atom: name of an existent viewable.", "ElementSpec" : "Currently, this should be element(IndexList), where IndexList is a list of integers: the coordinates of the viewable element within the viewable.", "Goal" : "Goal to be executed, mentioning ElementSpec.", "Solver" : "Solver implementing the changeable interface (eg. an eplex instance)"], summary : "Works as viewable_element_execute/3, but replaces the element spec with the changeable value as returned from the given Solver instead.", see_also : [viewable_element_execute / 3]]).
+:- comment(viewable_element / 3, [amode : viewable_element(++, ++, ?), args : ["ViewableName" : "Atom: name of an existent viewable.", "IndexList" : "List of integers: the coordinates of the viewable element within the viewable.", "ViewableElement" : "Term to be unified with the viewable element."], summary : "Index a viewable element inside a viewable.", desc : html("Note that this predicate throws an error if there are no current visualisation clients. Retrieves a single viewable element from a named viewable, given the element's array coordinates, and unifies it with <em>ViewableElement</em>. IndexList must be a ground list which has one positive integer for each dimension of the viewable."), fail_if : "ViewableName is not instantiated to the name of an existent viewable. ViewableElement will not unify with the specified element.", exceptions : [1 : "There are no current visualisation clients", 4 : "ViewableName is not an atom or string", 5 : "IndexList is not a ground list of integers", 6 : "A co-ordinate in Index is out of range", 8 : "IndexList has the wrong number of elements"], resat : no, eg : "       Success:\n\n       Failure:\n\n       Exceptions raised:\n", see_also : [viewable : viewable_create / 3, viewable : viewable_size / 2, viewable_element_to_string / 2, viewable_element_execute / 3]]).
+:- comment(viewable_element_execute / 3, [amode : viewable_element_execute(++, ++, ?), args : ["ViewableName" : "Atom: name of an existent viewable.", "ElementSpec" : "Currently, this should be element(IndexList), where IndexList is a list of integers: the coordinates of the viewable element within the viewable.", "Goal" : "Goal to be executed, mentioning ElementSpec."], summary : "Execute a goal for a viewable element inside a viewable.", desc : html("Note that this predicate throws an error if there are no current visualisation clients. The purpose of this predicate is to allow visualisation clients to call arbitrary goals which take viewable elements as input, without the visualisation clients having to retrieve the viewable elements themselves. <em>Goal</em> is the goal to be executed, but <em>Goal</em> mentions <em>ElementSpec</em> wherever it wishes to use the viewable element as input. The element specified by <em>ElementSpec</em> is retrieved from the viewable. Then all occurences of <em>ElementSpec</em> within <em>Goal</em> are replaced by the element, to give <em>NewGoal</em>. Finally, <em>NewGoal</em> is executed, and the predicate succeeds if <em>NewGoal</em> succeeds.  \n<p>\n\n\n\n"), fail_if : "Fails if NewGoal fails.", exceptions : [1 : "There are no current visualisation clients", 4 : "ViewableName is not an atom or string", 5 : "IndexList is not a ground list of integers", 6 : "A co-ordinate in Index is out of range", 8 : "IndexList has the wrong number of elements"], resat : yes, eg : "\nAn example, assumng there are visualisation clients running, would be:\n\n[eclipse 2]: viewable_create(v1, [[X]]), \n             viewable_element_execute(v1, element([1, 1]), var(element([1, 1]))).\n\nX = X\nYes (0.00s cpu)\n[eclipse 3]: \n", see_also : [viewable : viewable_create / 3, viewable : viewable_size / 2, viewable_element_to_string / 2, viewable_element / 3]]).
+:- comment(viewable_element_to_string / 2, [amode : viewable_element_to_string(?, -), args : ["ViewableElement" : "Any variable term, for example a viewable element you have just extracted from a viewable.", "String" : "A textual representation of the term, produced by this predicate."], summary : "Convert a variable or term to a nice string."]).

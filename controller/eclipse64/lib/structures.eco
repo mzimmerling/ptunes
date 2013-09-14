@@ -1,0 +1,11 @@
+:-(module(structures)).
+:-(export(','(/(define_struct,1),','(/(erase_struct,1),','(/(eq_struct,2),/(portray_struct,2)))))).
+:-(export(op(650,xfx,[eq_struct]))).
+:-(pragma(nodebug)).
+:-(tool(/(define_struct,1),/(define_struct,2))).
+:-(:(sepia_kernel,store_pred(/(define_struct,2),[](o(6),pw(2),a(1),y(1),o(3),a(2),y(2),o(104),a(1),warning_output,o(105),a(2),"WARNING: define_struct/1 is obsolete, use export struct or local struct",o(101),a(3),o(404),a(4),structures,o(143),proc(:(sepia_kernel,/(printf_body,4))),7,o(107),a(1),functor(/(struct,1)),o(80),y(1),o(397),y(2),a(2),proc(:(sepia_kernel,/(export_body,2))),o(0)),31,0,0,'Kernel/lib/structures.pl',0,0))).
+:-(:(sepia_kernel,store_pred(/(erase_struct,1),[](o(104),a(1),warning_output,o(105),a(2),"WARNING: erase_struct/1 is obsolete, ignored",o(101),a(3),o(404),a(4),structures,o(151),proc(:(sepia_kernel,/(printf_body,4))),o(0)),14,0,0,'Kernel/lib/structures.pl',0,0))).
+:-(:(sepia_kernel,store_pred(/(eq_struct,2),[](o(104),a(1),warning_output,o(105),a(2),"WARNING: eq_struct/2 is obsolete",o(101),a(3),o(404),a(4),structures,o(136),pw(0),o(143),proc(:(sepia_kernel,/(printf_body,4))),1,o(145),proc(/(abort,0)),o(0)),19,0,0,'Kernel/lib/structures.pl',0,0))).
+:-(tool(/(portray_struct,2),/(portray_struct,3))).
+:-(:(sepia_kernel,store_pred(/(portray_struct,3),[](o(6),pw(7),a(1),y(2),o(355),a(2),y(5),a(3),y(7),o(375),a(2),y(3),a(3),y(6),o(395),y(5),a(1),proc(/(functor,3)),237,o(285),a(1),y(4),o(353),y(3),a(2),y(6),a(3),o(143),proc(/(functor,3)),253,o(351),2,y(3),a(1),o(395),y(7),a(3),proc(:(sepia_kernel,/(current_struct_,3))),125,o(101),a(4),o(285),a(5),y(1),o(351),3,y(4),a(1),o(143),proc(/(make_list,5)),15,o(107),a(2),functor(/(with,2)),o(80),y(3),o(80),y(1),o(404),a(3),structures,o(397),y(2),a(1),proc(:(sepia_kernel,/(print_,3))),o(0)),66,0,0,'Kernel/lib/structures.pl',0,0))).
+:-(:(sepia_kernel,store_pred(/(make_list,5),[](o(212),a(6),o(120),a(3),ref(56),1,ref(22),o(128),0,6,ref(20),o(11),a(3),0,o(7),a(5),a(4),o(251),a(6),o(157),o(134),0,o(340),a(3),a(1),a(6),16,o(340),a(3),a(2),a(7),16,o(321),a(3),-1,a(3),24,o(2),a(4),a(8),o(106),a(4),o(91),pw(3),o(79),a(8),o(61),functor(/(:,2)),o(79),a(6),o(79),a(7),o(150),ref(0),o(0),o(177),0,ref(7)),58,0,0,'Kernel/lib/structures.pl',0,0))).

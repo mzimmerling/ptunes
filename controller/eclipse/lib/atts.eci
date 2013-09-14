@@ -1,0 +1,17 @@
+:- module(atts).
+:- export op(1150, fx, [attribute]).
+:- export attribute / 1.
+:- export atts_subset / 3.
+:- export get_atts / 2.
+:- export map_atts / 2.
+:- export put_atts / 2.
+:- reexport get_attributes / 4, replace_attribute / 3 from sepia_kernel.
+:- tool(attribute / 1, attribute_body / 2).
+:- tool(get_atts / 2, get_atts_body / 3).
+:- tool(map_atts / 2, map_atts_body / 3).
+:- tool(put_atts / 2, put_atts_body / 3).
+:- comment(categories, ["Compatibility"]).
+:- comment(summary, "Variable attributes compatible with SICStus v3").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(author, "Micha Meier, ECRC Munich").
+:- comment(date, "$Date: 2009/02/19 05:38:36 $").

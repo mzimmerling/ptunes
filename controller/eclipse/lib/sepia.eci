@@ -1,0 +1,61 @@
+:- module(sepia).
+:- export (abolish) / 2.
+:- export array / 3.
+:- export bsi / 0.
+:- export compiled_file / 2.
+:- export cprolog / 0.
+:- export current_array / 3.
+:- export define_global_macro / 3.
+:- export define_local_macro / 3.
+:- export (delay) / 2.
+:- export err_msg / 2.
+:- export get_error_handler / 2.
+:- export get_interrupt_handler / 2.
+:- export interrupt / 1.
+:- export interval_alarm / 1.
+:- export is_module / 1.
+:- export is_protected / 1.
+:- export load / 2.
+:- export local_op / 3.
+:- export ls / 0.
+:- export ls / 1.
+:- export no_delayed_goals / 0.
+:- export predicate_property / 1.
+:- export quintus / 0.
+:- export rtoken / 1.
+:- export rtoken / 2.
+:- export sicstus / 0.
+:- export wm_get / 2.
+:- export wm_set / 2.
+:- export abolish_body / 3.
+:- export array_body / 4.
+:- export bsi / 1.
+:- export cprolog / 1.
+:- export current_array_body / 4.
+:- export define_global_macro_ / 4.
+:- export is_protected_ / 2.
+:- export quintus / 1.
+:- export rtoken_body / 2.
+:- export rtoken_body / 3.
+:- export sicstus / 1.
+:- export op(500, fx, -).
+:- export op(500, fx, +).
+:- export op(200, fx, \).
+:- tool(rtoken / 1, rtoken_body / 2).
+:- tool(rtoken / 2, rtoken_body / 3).
+:- tool(current_array / 3, current_array_body / 4).
+:- tool(array / 3, array_body / 4).
+:- tool(define_local_macro / 3, define_macro_ / 4).
+:- tool(define_global_macro / 3, define_global_macro_ / 4).
+:- tool(local_op / 3, local_op_body / 4).
+:- tool((abolish) / 2, abolish_body / 3).
+:- tool(ls / 0, listing_body / 1).
+:- tool(ls / 1, listing_body / 2).
+:- tool(is_protected / 1, is_protected_ / 2).
+:- tool(predicate_property / 1, pred_body / 2).
+:- tool((delay) / 2, (delay) / 3).
+:- comment(categories, ["Compatibility"]).
+:- comment(summary, "A number of obsolete SEPIA built-ins").
+:- comment(date, "$Date: 2009/02/19 05:38:37 $").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(status, deprecated).

@@ -1,0 +1,26 @@
+:- module(fromonto).
+:- export from_stream / 2.
+:- export onto_stream / 2.
+:- export from_string / 2.
+:- export onto_string / 2.
+:- export from_file / 2.
+:- export onto_file / 2.
+:- export op(800, yfx, [from_string, onto_string, from_stream, onto_stream, from_file, onto_file]).
+:- tool(from_string / 2, from_string_body / 3).
+:- tool(from_file / 2, from_file_body / 3).
+:- tool(from_stream / 2, from_stream_body / 3).
+:- tool(onto_string / 2, onto_string_body / 3).
+:- tool(onto_file / 2, onto_file_body / 3).
+:- tool(onto_stream / 2, onto_stream_body / 3).
+:- comment(categories, ["Programming Utilities"]).
+:- comment(summary, "Redirect input and output streams in a convenient way").
+:- comment(author, "Joachim Schimpf, ECRC Munich").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:37 $").
+:- comment(eg, "\n    [eclipse 1]: write(hello) onto_file scratch.\n    yes.\n    [eclipse 2]: read(X) from_file scratch.\n    X = hello\n    yes.\n    [eclipse 3]: read(X) from_string \"s(a,2,[3])\".\n    X = s(a, 2, [3])\n    yes.\n    [eclipse 4]: (write(hello), put(0' ), write(world)) onto_string S.\n    S = \"hello world\"\n    yes.\n    ").
+:- comment(from_file / 2, [summary : "Redirect Goal's standard input stream to File", template : "+Goal from_file ++File", desc : html("Equivalent to once(Goal), with input redirected to File.")]).
+:- comment(from_stream / 2, [summary : "Redirect Goal's standard input stream to Stream", template : "+Goal from_stream ++Stream", desc : html("Equivalent to once(Goal), with input redirected to Stream.")]).
+:- comment(from_string / 2, [summary : "Redirect Goal's standard input stream to String", template : "+Goal from_string ++String", desc : html("Equivalent to once(Goal), with input redirected to String.")]).
+:- comment(onto_file / 2, [summary : "Redirect Goal's standard output stream to File", template : "+Goal onto_file ++File", desc : html("Equivalent to once(Goal), with output redirected to File.")]).
+:- comment(onto_stream / 2, [summary : "Redirect Goal's standard output stream to Stream", template : "+Goal onto_stream ++Stream", desc : html("Equivalent to once(Goal), with output redirected to Stream.")]).
+:- comment(onto_string / 2, [summary : "Redirect Goal's standard output stream to String", template : "+Goal onto_string ?String", desc : html("Equivalent to once(Goal), with output redirected to String.")]).

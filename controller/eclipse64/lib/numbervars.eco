@@ -1,0 +1,5 @@
+:-(module(numbervars)).
+:-(export(/(numbervars,3))).
+:-(export(syntax_option('$VAR'))).
+:-(:(sepia_kernel,store_pred(/(numbervars,3),[](o(212),a(4),o(123),a(1),ref(54),1,ref(36),o(139),ref(13),o(128),0,4,ref(34),o(16),a(1),functor(/('$VAR',1)),ref(21),o(43),a(2),o(139),ref(23),o(44),a(2),o(251),a(4),o(321),a(2),1,a(1),24,o(7),a(1),a(3),o(157),o(134),0,o(2),a(2),a(4),o(401),a(1),a(2),4,o(362),a(5),a(3),a(1),o(102),a(1),0,o(151),proc(/(numbervars,5)),o(0),o(177),table([-(/('$VAR',1),ref(9))],2)),56,0,0,'Kernel/lib/numbervars.pl',0,0))).
+:-(:(sepia_kernel,store_pred(/(numbervars,5),[](o(212),a(6),o(128),0,6,ref(15),o(7),a(2),a(1),o(251),a(6),o(7),a(4),a(5),o(157),o(134),0,o(321),a(1),1,a(6),24,o(6),pw(5),a(6),y(4),o(4),y(4),a(6),o(340),a(6),a(3),a(1),16,o(352),2,a(2),y(1),o(3),a(5),y(3),o(285),a(3),y(5),o(2),a(4),a(2),o(143),proc(/(numbervars,3)),63,o(4),y(4),a(1),o(351),2,y(1),a(2),o(353),y(5),a(4),y(3),a(5),o(144),ref(0),o(0)),65,0,0,'Kernel/lib/numbervars.pl',0,0))).

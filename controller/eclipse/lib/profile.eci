@@ -1,0 +1,12 @@
+:- module(profile).
+:- export profile / 1.
+:- export profile / 2.
+:- tool(profile / 1, profile_body / 2).
+:- tool(profile / 2, profile_body / 3).
+:- comment(categories, ["Development Tools"]).
+:- comment(summary, "Profiling package for ECLiPSe programs").
+:- comment(author, "Micha Meier and Stefano Novello, ECRC Munich").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:37 $").
+:- comment(profile / 1, [template : "profile(+Goal)", summary : "Execute Goal (once) and print profiling information"]).
+:- comment(profile / 2, [template : "profile(+Goal, +Options)", args : ["Goal" : "Callable term", "Options" : "List of options"], summary : "Execute Goal (once) and print profiling information", desc : html("Possible options:\n    <DL>\n    <DT>simple\n\t<DD>show external predicates in the output profile\n    <DT>keep_file\n\t<DD>don't destroy the samples file after profiling\n    </DL>\n    ")]).

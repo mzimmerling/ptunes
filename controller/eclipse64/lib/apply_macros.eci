@@ -1,0 +1,40 @@
+:- module(apply_macros).
+:- export fromto / 4.
+:- export maplist / 3.
+:- export mapstream / 3.
+:- export mapargs / 3.
+:- export appnodes / 2.
+:- export sumargs / 4.
+:- export checklist / 2.
+:- export applist / 2.
+:- export selectlist / 3.
+:- export sumlist / 4.
+:- export sumnodes / 4.
+:- tool(maplist / 3, maplist_body / 4).
+:- tool(mapstream / 3, mapstream_body / 4).
+:- tool(mapargs / 3, mapargs_body / 4).
+:- tool(appnodes / 2, appnodes_body / 3).
+:- tool(sumargs / 4, sumargs_body / 5).
+:- tool(applist / 2, applist_body / 3).
+:- tool(checklist / 2, applist_body / 3).
+:- tool(selectlist / 3, selectlist_body / 4).
+:- tool(sumlist / 4, sumlist_body / 5).
+:- tool(sumnodes / 4, sumnodes_body / 5).
+:- tool(fromto / 4, fromto_body / 5).
+:- comment(categories, ["Algorithms", "Programming Utilities"]).
+:- comment(summary, "Utilities to apply a predicate to all elements of a list resp. all subterms of a term").
+:- comment(author, "Joachim Schimpf, ECRC Munich").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:36 $").
+:- comment(desc, html("\n    Note that this library is largely superseded by the do-loop construct!\n    <P>\n    A collection of utilities to apply a predicate to\n    all elements of a list resp. all subterm of a term.\n    To avoid performance degradation due to apply/2,\n    they are implemented as macros, i.e. they are specialized\n    into auxiliary predicates without metacalls, and the\n    calls are translated into calls of the auxiliary predicates.")).
+:- comment(applist / 2, [template : "applist(+Pred, +List)", summary : "Apply a predicate to all list elements", eg : "applist(<(0), [1,2,3])."]).
+:- comment(appnodes / 2, [template : "appnodes(+Pred, +Term)", summary : "Call Pred on all Subterms of Term (depth-first and left-to-right order)"]).
+:- comment(checklist / 2, [template : "checklist(+Pred, +List)", summary : "Apply a predicate to all list elements", eg : "checklist(<(0), [1,2,3])."]).
+:- comment(fromto / 4, [template : "fromto(+From, +To, +Step, +Pred)", summary : "Call Pred with the numbers From..To in increments of Step"]).
+:- comment(mapargs / 3, [template : "mapargs(+Pred, +TermIn, ?TermOut)", summary : "Create new term by applying a predicate to all arguments", eg : "mapargs(atom_string, s(a,b,c), s(\"a\",\"b\",\"c\"))."]).
+:- comment(maplist / 3, [template : "maplist(+Pred, +ListIn, ?ListOut)", summary : "Create new list by applying a predicate to all list elements", eg : "maplist(times(3), [1,2,3,4], [3,6,9,12])."]).
+:- comment(mapstream / 3, [template : "mapstream(+Pred, ?ListIn, ?ListOut)", summary : "Like maplist/3, but delays if ListIn is not complete"]).
+:- comment(selectlist / 3, [template : "selectlist(+Pred, +ListIn, ?ListOut)", summary : "Creates output list of all list elements that pass a given test", eg : "selectlist(<(0), [1,0,-2,3], [1,3])."]).
+:- comment(sumargs / 4, [template : "sumargs(+Pred, +Term, ?AccIn, ?AccOut)", summary : "Call Pred on all arguments of Term and collect a result in Accumulator", desc : "The traversal order is unspecified!"]).
+:- comment(sumlist / 4, [template : "sumlist(+Pred, +List, ?AccIn, ?AccOut)", summary : "Call Pred on all element of List and collect a result in Accumulator", eg : "\n\tsumlist(plus, [1,2,3,4], 1, 10).\n\tsumlist(times, [1,2,3,4], 1, 24)."]).
+:- comment(sumnodes / 4, [template : "sumnodes(+Pred, +Term, ?AccIn, ?AccOut)", summary : "Call Pred on all Subterms of Term and collect a result in Accumulator", desc : "The traversal is depth-first and left-to-right", eg : "\n\tsumnodes(vars, s(1,t(X,2),[Y]), [], [X,Y]).\n\twhere\n\t    vars(X, Vars, [X|Vars]) :- var(X), !.\n\t    vars(_, Vars, Vars).\n\n\tor even more elegant using grammar rules:\n\n\tsumnodes(vars, s(1,t(X,2),[Y]), [X,Y], []).\n\twhere\n\t    vars(X) --> {var(X)} -> [X];[]."]).

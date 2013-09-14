@@ -1,0 +1,3 @@
+:-(module(viewable)).
+:-(use_module(vc_support)).
+:-(reexport(from(','(/(viewable_create,2),','(/(viewable_create,3),','(/(viewable_create,4),','(/(viewable,1),','(/(viewable_size,2),','(/(viewable_type,2),','(/(viewable_expand,3),/(viewable_expand,4)))))))),vc_support))).

@@ -1,0 +1,32 @@
+:- module(sicstus).
+:- reexport quintus except load / 1.
+:- export op(1150, fx, block).
+:- export block / 1.
+:- export call_residue / 2.
+:- export dif / 2.
+:- export freeze / 2.
+:- export frozen / 2.
+:- export (if) / 3.
+:- export load / 1.
+:- export on_exception / 3.
+:- export raise_exception / 1.
+:- export when / 2.
+:- export chtab(92, escape).
+:- tool(freeze / 2, freeze_body / 3).
+:- tool(block / 1, block_body / 2).
+:- export rename_head / 2.
+:- tool(when / 2, when_body / 3).
+:- tool(call_residue / 2, call_residue_body / 3).
+:- tool((if) / 3, if_body / 4).
+:- tool(load / 1, load_body / 2).
+:- export fcompile / 1.
+:- tool(fcompile / 1, fcompile / 2).
+:- tool(on_exception / 3, on_exception_body / 4).
+:- comment(categories, ["Compatibility"]).
+:- comment(summary, 'SICStus Prolog Compatibility Package').
+:- comment(author, 'Micha Meier, ECRC Munich').
+:- comment(copyright, 'Cisco Systems, Inc').
+:- comment(date, '$Date: 2009/02/19 05:38:37 $').
+:- comment(desc, html('\n    ECLiPSe includes a SICStus Prolog compatibility package to ease\n    the task of porting SICStus Prolog applications to ECLiPSe Prolog. \n    This package includes the C-Prolog compatibility package (lib(cprolog))\n    and the Quintus-Prolog compatibility package (lib(quintus)). \n    <P>\n    Please note that this appendix does not detail the functionality\n    of SICStus Prolog, refer to the SICStus Prolog documentation for\n    this information. \n    <P>\n    The effect of the compatibility library is local to the module where\n    it is loaded. For maximum compatibility, a Sicstus program should\n    be wrapped in a separate module starting with a directive like\n    <PRE>\n    :- module(mymodule, [], sicstus).\n    </PRE>\n    In this case, Eclipse-specific language constructs will not be available.\n    <P>\n    If the compatibility package is loaded into a standard module, e.g. like\n    <PRE>\n    :- module(mymixedmdule).\n    :- use_module(library(sicstus)).\n    </PRE>\n    then Sicstus and Eclipse language features can be used together. \n    However, ambiguities must be resolved explicitly and confusion may\n    arise from the different meaning of quotes in Eclipse vs Sicstus-Prolog.\n    <P>\n    A sockets library is provided for compatibility with the sockets\n    manipulation predicates of SICStus.  To use these predicates, the\n    sockets library has to be loaded: \n    <PRE>\n    :- use_module(library(sockets)).\n    </PRE>\n    For SICStus 3.0, the sockets predicates are also in a sockets library,\n    so no changes are needed to load the library.  However, for older\n    versions of SICStus, the predicates are available as built-ins, and no\n    library has to be loaded.  So if the code is written for older\n    versions of SICStus, then the above line has to be added. \n    <P>\n    The sockets library can be used independently of the sicstus library. \n    Note also that ECLiPSe also provides its own socket manipulation\n    predicates that provides similar functionalities to the sockets library. \n    <P>\n    Since the SICStus package contains the Quintus one, the syntax\n    differences are the same.\n    ')).
+:- comment(see_also, [library(cio), library(cprolog), library(quintus), library(sockets), library(swi)]).
+:- comment(call_residue / 2, [template : 'call_residue(+Goal,-Residue)', summary : 'This is only approximate, the variables in the second argument are dummies']).

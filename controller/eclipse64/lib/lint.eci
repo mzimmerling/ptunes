@@ -1,0 +1,12 @@
+:- module(lint).
+:- export lint / 1.
+:- export saros_lint / 1.
+:- export lint / 2.
+:- comment(categories, ["Development Tools"]).
+:- comment(summary, "Heuristic program checker").
+:- comment(author, "Joachim Schimpf, IC-Parc").
+:- comment(copyright, "Cisco Systems, Inc.").
+:- comment(date, "$Date: 2009/12/13 22:43:10 $").
+:- comment(desc, html("\n    This library analyses an ECLiPSe source module or file and generates\n    warning messages for dubious programming constructs and violation\n    of naming conventions.\n    ")).
+:- comment(lint / 1, [summary : "Check the given source module file", args : ["File" : "Name of the source file (atom or string)"], amode : lint(+), desc : html("\n    Analyse a source file, do various heuristic checks on the code,\n    and print warnings if appropriate. This is equivalent to\n    <PRE>\n\tlint(File, [])\n    </PRE>\n    The analysed code can use pragmas of the form\n    <PRE>\n    :- pragma(lint(Option:Value)).\n    </PRE>\n    to enable or disable individual checks. See lint/2 for a list\n    of the options.\n    "), see_also : [lint / 2]]).
+:- comment(lint / 2, [summary : "Check the given source module file", args : ["File" : "Name of the source file (atom or string)", "Options" : "A list of Option:Value structures"], amode : lint(+, +), desc : html("\n    Analyse a source file, do various heuristic checks on the code,\n    and print warnings if appropriate.\n<P>\n    The possible options are:\n<DL>\n    <DT>head_unify ('off' or 'on')</DT>\n\t<DD>warn if a clause with a cut contains aliasing in the head,\n\twhich may indicate non-steadfast code. Default: on.</DD>\n    <DT>missing_else ('off' or 'on')</DT>\n\t<DD>warn if a conditions does not have an else case, since this\n\twill fail and is more clearly written using a simple conjunction\n\tor once/1. Default: on.</DD>\n    <DT>naming_conventions ('off' or 'on')</DT>\n\t<DD>enable/disable naming conventions checks for variable names,\n\tpredicate names and module names. Default: on.</DD>\n    <DT>singletons ('off' or 'on')</DT>\n\t<DD>enable/disable singleton variable checks. Default: on.</DD>\n</DL>\n    These option settings can be overridden via pragmas in the analysed\n    file.  E.g. a pragma\n    <PRE>\n    :- pragma(lint(head_unify:off)).\n    </PRE>\n    will disable head_unify checking for the subsequent code, or until\n    another pragma enables it again.\n    "), see_also : [lint / 1]]).

@@ -1,0 +1,21 @@
+:- module(par_util).
+:- export & / 2.
+:- export par_between / 3.
+:- export par_delete / 3.
+:- export par_maplist / 3.
+:- export par_member / 2.
+:- export statistics_par / 0.
+:- export statistics_par_reset / 0.
+:- export op(950, xfy, &).
+:- tool(& / 2, '&_body' / 3).
+:- tool(par_maplist / 3, par_maplist_body / 4).
+:- comment(categories, ["Algorithms"]).
+:- comment(summary, "Parallel versions of various predicates").
+:- comment(author, "Joachim Schimpf, ECRC Munich").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:37 $").
+:- comment(& / 2, [template : "Goal1 & Goal2", summary : "Parallel AND operator implemented on top of OR-parallelism", desc : html("Parallel AND operator implemented on top of\n    OR-parallelism.  This will only pay off for sufficiently\n    coarse-grained computations in Goal1 and Goal2.")]).
+:- comment(par_between / 3, [template : "par_between(+From, +To, ?I)", summary : "Generates integers between From and To in parallel", see_also : [fork / 2, between / 3, between / 4]]).
+:- comment(par_delete / 3, [template : "par_delete(?Element, ?List, ?Rest)", summary : "Parallel version of delete/3"]).
+:- comment(par_maplist / 3, [template : "par_maplist(+Pred, +In, ?Out)", summary : "Parallel version of maplist/3", desc : html("Parallel version of maplist/3.  The semantics is not\n    exactly the same as maplist/3:  It does not work backwards and it\n    does not cope with aliasing between the In and the Out list, since\n    it is implemented on top of findall/3.  There will only be a\n    performance gain if the mapping predicate does enough computation\n    to make the overhead pay off."), see_also : [maplist / 3]]).
+:- comment(par_member / 2, [template : "par_member(?Element, +List)", summary : "Parallel version of member/2", desc : html("Parallel version of member/2, i.e.  selects elements from\n    the given list in parallel.  Note that it cannot work backwards\n    and generate lists like member/2 can, the list must be a proper list.")]).

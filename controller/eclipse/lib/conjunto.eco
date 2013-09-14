@@ -1,0 +1,3 @@
+:-(module(conjunto)).
+:-(export(initialization(use_module(set)))).
+:-(use_module(set)).

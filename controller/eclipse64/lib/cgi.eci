@@ -1,0 +1,14 @@
+:- module(cgi).
+:- export posted_params / 1.
+:- export get_error_output / 1.
+:- export get_param_value / 3.
+:- export substitute_placeholders / 3.
+:- comment(categories, ["Interfacing"]).
+:- comment(summary, "Some utilities for writing cgi scripts with ECLiPSe").
+:- comment(author, "Joachim Schimpf, IC-Parc, Imperial College, London").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:37 $").
+:- comment(get_error_output / 1, [template : "get_error_output(-Message)", summary : "Retrieve error messages explaining failure of posted_params/1", see_also : [posted_params / 1]]).
+:- comment(get_param_value / 3, [template : "get_param_value(+NameValuePairs, +Name, ?Value)", summary : "Look up the value of a posted parameter", see_also : [posted_params / 1, substitute_placeholders / 3], desc : html("Look up the value of a posted parameter. Returns an empty string\n    if there is no parameter with the given name. Name must be an atom.")]).
+:- comment(posted_params / 1, [template : "posted_params(-NameValuePairs)", summary : "Returns the parameters posted to the CGI script", fail_if : "There was a problem obtaining the parameters from the environment", see_also : [get_param_value / 3, substitute_placeholders / 3, get_error_output / 1], desc : html("Returns a list of Name=Value pairs, where Name is an atom\n    and Value is a string, representing the information that was posted to\n    the CGI script. Both POST and GET methods are supported.\n    <P>\n    If there is a problem, the predicate fails. In that case, the caller should\n    retrieve an error message using get_error_output/1 and present it to the\n    user, e.g. by embedding it into the generated html page.\n    ")]).
+:- comment(substitute_placeholders / 3, [template : "substitute_placeholders(+PageTemplate, +NameValuePairs, -Page)", summary : "Substitute placeholders in a html source with a value string", desc : html("Takes a string (usually a html-source) with embedded\n    placeholders and replaces the placeholders by their value according\n    to the NameValuePairs argument. The syntax for placeholders is their\n    name enclosed in ^ (up arrow) characters."), see_also : [posted_params / 1, get_param_value / 3]]).

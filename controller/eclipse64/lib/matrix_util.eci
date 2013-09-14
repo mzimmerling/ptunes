@@ -1,0 +1,20 @@
+:- module(matrix_util).
+:- export matrix / 3.
+:- export matrix / 4.
+:- export list2rows / 4.
+:- export list2cols / 4.
+:- export transpose / 2.
+:- export concat / 2.
+:- export read_data / 3.
+:- comment(categories, ["Data Structures", "Programming Utilities"]).
+:- comment(summary, "Predicates to build matrices from lists").
+:- comment(author, "Joachim Schimpf, IC-Parc").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:37 $").
+:- comment(concat / 2, [summary : "Concatenate all the rows (or columns) into a flat list", template : "concat(+RowsOrCols, -List)", see_also : [list2rows / 4, list2cols / 4, transpose / 2]]).
+:- comment(list2cols / 4, [summary : "Create a matrix from a flat list of row-wise listed elements", template : "list2rows(+List, +NRows, +NCols, -Cols)"]).
+:- comment(list2rows / 4, [summary : "Create a matrix from a flat list of row-wise listed elements", template : "list2rows(+List, +NRows, +NCols, -Rows)"]).
+:- comment(matrix / 3, [summary : "Create a matrix as a list of rows", template : "matrix(+NRow, +NCols, -Rows)"]).
+:- comment(matrix / 4, [summary : "Create a matrix as both a list of rows and a list of columns", template : "matrix(+NRows, +NCols, -Rows, -Cols)"]).
+:- comment(read_data / 3, [summary : "Read numbers from a file into List", desc : html("Read numbers from a file into List until either the list is full or\n    the end of file has been reached. In the first case, not all numbers in the\n    file may be read, in the second, the list may not be fully instantiated.\n    The count of numbers that have actually been read is returned in Length.\n    "), template : "read_data(+File, ?List, -Length)", see_also : [list2rows / 4, list2cols / 4, transpose / 2]]).
+:- comment(transpose / 2, [summary : "Transpose a matrix (list of rows or list of columns)", template : "transpose(+Matrix, -Transposed)"]).

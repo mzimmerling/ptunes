@@ -1,0 +1,8 @@
+:- module(anti_unify).
+:- export anti_unify / 3.
+:- comment(categories, ["Algorithms"]).
+:- comment(summary, "Computes the most specific generalization of two terms").
+:- comment(author, "Joachim Schimpf, ECRC Munich").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:36 $").
+:- comment(anti_unify / 3, [template : "anti_unify(Term1, Term2, General)", summary : "Computes the most specific generalization of two terms in\n    N*log(N) time, where N is the size of the smaller term.", eg : "\n    [eclipse 10]: anti_unify(a, b, X).\n    X = _65\n    yes.\n\n    [eclipse 11]: anti_unify(a, a, X).\n    X = a\n    yes.\n\n    [eclipse 9]: anti_unify(foo(a,b,c), foo(b,b,b), X).\n    X = foo(_115, b, _98)\n    yes.\n\n    [eclipse 8]: anti_unify(foo(a,a,a), foo(b,b,b), X).\n    X = foo(_98, _98, _98)\n    yes.\n    "]).

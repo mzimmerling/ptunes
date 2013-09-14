@@ -1,0 +1,7 @@
+#! /bin/sh
+ECLIPSEDIR="${ECLIPSEDIR:-/home/user/luca/Papers/ipsn10mac/code/controller/eclipse}"
+LD_LIBRARY_PATH="$ECLIPSEDIR/lib/i386_linux:$LD_LIBRARY_PATH"
+JRE_HOME="${JRE_HOME:-}"
+CLASSPATH="$ECLIPSEDIR/lib/eclipse.jar:${JRE_HOME}/lib/rt.jar"
+export ECLIPSEDIR JRE_HOME
+exec "${JRE_HOME}/bin/java" -Djava.compiler= -Declipse.directory="$ECLIPSEDIR" -classpath "$CLASSPATH" com.parctechnologies.eclipse.JEclipse "$@"

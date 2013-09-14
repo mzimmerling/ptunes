@@ -1,0 +1,3 @@
+:-(module(http)).
+:-(reexport(http_client)).
+:-(reexport(http_server)).

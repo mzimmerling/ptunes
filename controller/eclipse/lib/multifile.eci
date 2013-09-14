@@ -1,0 +1,10 @@
+:- module(multifile).
+:- export multifile / 1.
+:- tool(multifile / 1, multifile_ / 2).
+:- export macro((:) / 2, t_colon_clause / 3, [clause]).
+:- comment(categories, ["Compatibility"]).
+:- comment(summary, "Multifile declaration, for Prolog compatibility").
+:- comment(author, "Joachim Schimpf, Coninfer Ltd").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/02/19 05:38:37 $").
+:- comment(desc, html("\n\tThis library implements the multifile/1 declaration, and allows clauses\n\tfor multifile predicates to be prefixed with their module name.\n")).

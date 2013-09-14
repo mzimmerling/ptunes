@@ -1,0 +1,115 @@
+:- module(quintus).
+:- reexport cio.
+:- reexport foreign.
+:- reexport multifile.
+:- reexport eclipse_language except get / 1, put / 1, put / 2, instance / 2, (abolish) / 1, (dynamic) / 1, display / 1, ensure_loaded / 1, erase / 1, op / 3, recorda / 3, recordz / 3, recorded / 3, use_module / 1, use_module_body / 2.
+:- export op(0, xfx, of).
+:- export op(0, xfx, with).
+:- export op(0, xfy, do).
+:- export op(0, xfx, @).
+:- export op(0, fx, -?->).
+:- export op(0, fy, not).
+:- export op(0, fy, spied).
+:- export op(0, fx, delay).
+:- export macro((with) / 2, (=) / 2, []).
+:- export macro((of) / 2, (=) / 2, []).
+:- export syntax_option(nl_in_quotes).
+:- export syntax_option(no_array_subscripts).
+:- export syntax_option(limit_arg_precedence).
+:- export syntax_option(doubled_quote_is_quote).
+:- export syntax_option('$VAR').
+:- export syntax_option(bar_is_no_atom).
+:- export syntax_option(no_attributes).
+:- export syntax_option(no_curly_arguments).
+:- export syntax_option(blanks_after_sign).
+:- export chtab(92, symbol).
+:- export chtab(128, string_quote).
+:- export chtab(34, list_quote).
+:- export op(1150, fx, [meta_predicate, multifile, discontiguous, public, mode, dynamic, initialization, volatile]).
+:- reexport '.' / 3, consult / 1, current_functor / 2, current_predicate / 2, db_reference / 1, erased / 1, fileerrors / 0, get / 1, get0 / 1, heapused / 1, leash / 1, log10 / 2, log / 2, nofileerrors / 0, primitive / 1, prompt / 2, put / 1, reconsult / 1, sh / 0 from cprolog.
+:- reexport op(_142979, _142980, _142981) from cprolog.
+:- export (abolish) / 1.
+:- export (abolish) / 2.
+:- export absolute_file_name / 2.
+:- export atom_chars / 2.
+:- export character_count / 2.
+:- export current_input / 1.
+:- export current_output / 1.
+:- export current_key / 2.
+:- export current_module / 2.
+:- export display / 1.
+:- export (dynamic) / 1.
+:- export ensure_loaded / 1.
+:- export erase / 1.
+:- export expand_term / 2.
+:- export flush_output / 1.
+:- export format / 2.
+:- export format / 3.
+:- export gc / 0.
+:- export get0 / 2.
+:- export incore / 1.
+:- export instance / 2.
+:- export is_digit / 1.
+:- export is_lower / 1.
+:- export is_upper / 1.
+:- export line_count / 2.
+:- export manual / 0.
+:- export meta_predicate / 1.
+:- export no_style_check / 1.
+:- export nogc / 0.
+:- export nospyall / 0.
+:- export number_chars / 2.
+:- export numbervars / 3.
+:- export op / 3.
+:- export open_null_stream / 1.
+:- export otherwise / 0.
+:- export portray_clause / 1.
+:- export predicate_property / 2.
+:- export prolog_flag / 2.
+:- export prolog_flag / 3.
+:- export public / 1.
+:- export put / 2.
+:- export put_line / 1.
+:- export recorda / 3.
+:- export recorded / 3.
+:- export recordz / 3.
+:- export set_input / 1.
+:- export set_output / 1.
+:- export source_file / 1.
+:- export source_file / 2.
+:- export stream_code / 2.
+:- export stream_position / 2.
+:- export stream_position / 3.
+:- export style_check / 1.
+:- export term_expansion / 2.
+:- export ttyflush / 0.
+:- export ttyget / 1.
+:- export ttyget0 / 1.
+:- export ttynl / 0.
+:- export ttyput / 1.
+:- export ttyskip / 1.
+:- export ttytab / 1.
+:- export unix / 1.
+:- export unknown / 2.
+:- export use_module / 1.
+:- export use_module / 2.
+:- export version / 0.
+:- export tr_lib / 2.
+:- export macro(library_directory / 1, tr_lib / 2, [clause]).
+:- tool(use_module / 2, use_module_body / 3).
+:- tool(use_module / 1, use_module_body / 2).
+:- tool(ensure_loaded / 1, use_module_body / 2).
+:- tool((abolish) / 2, abolish_body / 3).
+:- tool((dynamic) / 1, qdynamic_body / 2).
+:- tool(current_key / 2, current_key_body / 3).
+:- tool(recorded / 3, recorded_body / 4).
+:- tool(recorda / 3, recorda_body / 4).
+:- tool(recordz / 3, recordz_body / 4).
+:- tool(erase / 1, erase_body / 2).
+:- comment(categories, ["Compatibility"]).
+:- comment(summary, 'Quintus prolog compatibility package').
+:- comment(author, 'Micha Meier, ECRC Munich').
+:- comment(copyright, 'Cisco Systems, Inc').
+:- comment(date, '$Date: 2009/02/19 05:38:37 $').
+:- comment(desc, html('\n    ECLiPSe includes a Quintus Prolog compatibility package to ease the\n    task of porting Quintus Prolog applications to ECLiPSe Prolog.  This\n    package does not provide the user with a system completely compatible\n    to Quintus Prolog, however it provides most of the Quintus built-in\n    predicates, moreover some of the Quintus library predicates are\n    available in the ECLiPSe library.  This package includes the C-Prolog\n    compatibility package (see Appendix A.6). \n    <P>\n    Please note that this appendix does not detail the functionality of\n    Quintus Prolog, refer to the Quintus Prolog documentation for this\n    information. \n    <P>\n    The effect of the compatibility library is local to the module where\n    it is loaded. For maximum compatibility, a Quintus program should\n    be wrapped in a separate module starting with a directive like\n    <PRE>\n    :- module(mymodule, [], quintus).\n    </PRE>\n    In this case, Eclipse-specific language constructs will not be available.\n    <P>\n    If the compatibility package is loaded into a standard module, e.g. like\n    <PRE>\n    :- module(mymixedmdule).\n    :- use_module(library(quintus)).\n    </PRE>\n    then Quintus and Eclipse language features can be used together. \n    However, ambiguities must be resolved explicitly and confusion may\n    arise from the different meaning of quotes in Eclipse vs Quintus-Prolog.\n    <P>\n    The following differences remain even with the compatibility package: \n    <DL>\n    <DT>expand_term/2 \n\t<DD>This predicate is dummy, since the ECLiPSe macro facility\n\tworks on every input term, provided that the flag\n\tmacro_expansion is set to on. \n    <DT>get0/2 \n\t<DD>This predicate is identical to get/2 in ECLiPSe. \n    <DT>help/1 \n\t<DD>This is the normal ECLiPSe help/1 predicate. \n    <DT>meta_predicate/1 \n\t<DD>This predicate is not available, as the Quintus method of\n\tpassing the module information to meta predicates differs\n\tsubstantially from the ECLiPSe more general concept of tools\n\t(see Section 9.6.4).  Only the operator definition for this\n\tfunctor is available. \n    <DT>multifile/1 \n\t<DD>This is implemented by declaring the predicates as dynamic, so\n\tto obtain more efficient programs it is better to put all\n\tclauses of the same procedure into one file (or to concatenate\n\tall files where multifile predicates occur). \n    <DT>predicate_property/2 \n\t<DD>The property interpreted is not provided.  The property\n\texported is returned if the predicate is exported or global. \n\tUse of get_flag/3 should be preferred. \n    <DT>prolog_flag/2, 3 \n\t<DD>There are some differences in the flags, as they are mostly\n\tsimulated with the ECLiPSe flags:\n\t<UL>\n\t    <LI>not all the character escapes used in the Quintus Prolog\n\t    are available.\n\t    <LI>gc_margin is taken as the ECLiPSe flag gc_interval\n\t    (see Section 19.2)\n\t    <LI>setting gc_trace to on sets also gc to on\n\t</UL>\n    <DT>public/1\n\t<DD>synonym for export/1 \n    <DT>statistics/0, 2 \n\t<DD>these predicates are slightly different than in Quintus,\n\tsee the description of the ECLiPSe statistics/2 predicate. \n\tThe predicate statistics/2 also accepts all Quintus values in\n\tthe Quintus mode, but for stack_shifts is always returns\n\tzeros.  statistics/0 returns only Quintus values when in\n\tQuintus mode. \n    <DT>ttyflush/0, ttyget/1, ttyget0/1, ttynl/0, ttyput/1, ttyskip/1, ttytab/1 \n\t<DD>these predicates work with the stdout stream \n    <DT>line_position/2\n\t<DD>Not implemented.  To perform sophisticated output formatting,\n\tprintf/2,3 or string streams can be used.\n    </DL>\n    The list below describes the syntax differences between\n    ECLiPSe and Quintus Prolog.  The following properties of Quintus\n    Prolog are simulated by the compatibility package: \n    <UL>\n\t<LI>single (resp.  double) quote must be doubled between\n\t    single (resp.  double) quote. \n\t<LI>The symbol | (bar) is recognised as an alternative sign\n\t    for a disjunction and it acts as an infix operator. \n\t<LI>the symbol | is not an atom\n    </UL>\n    The following Quintus properties are not simulated: \n    <UL>\n\t<LI>a clause can not be ended by end of file. \n\t<LI>signed numbers: explicitly positive numbers are structures. \n\t<LI>a real with an exponent must have a floating point. \n\t<LI>a space is allowed before the decimal point and the exponent sign. \n\t<LI>the definition of the escape sequence is more extended\n\t    than in ECLiPSe. \n\t<LI>spy/1 and nospy/1 accept as arguments lists, rather than\n\t    comma-separated terms like in ECLiPSe. \n    </UL>\n    ')).
+:- comment(see_also, [library(cio), library(cprolog), library(sicstus), library(swi), library(multifile)]).

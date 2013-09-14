@@ -1,0 +1,7 @@
+all: ravenusbstick
+
+CONTIKI_NO_NET=1
+
+CONTIKI = ../..
+
+include $(CONTIKI)/Makefile.include

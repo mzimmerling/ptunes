@@ -1,0 +1,11 @@
+:- module(notinstance).
+:- export op(700, xfx, ~=<).
+:- export ~=< / 2.
+:- export (~=) / 2.
+:- comment(categories, ["Algorithms"]).
+:- comment(summary, "Constraints for structural equality and subsumption").
+:- comment(author, "Joachim Schimpf, ECRC Munich").
+:- comment(copyright, "Cisco Systems, Inc").
+:- comment(date, "$Date: 2009/03/13 06:26:54 $").
+:- comment((~=) / 2, [template : "X ~= Y", summary : "Constrains X and Y to be different", desc : html("Fails if X and Y are non-unifiable, otherwise succeeds\n    or delays.  Unlike the implementation of the same predicate in the\n    kernel, this one maintains and explicit wavefront and has only one\n    delayed goal.  Failure is detected eagerly.  Success may be\n    detected late.")]).
+:- comment(~=< / 2, [template : "X ~=< Y", summary : "Constrain X not to be an instance of Y", desc : html("We assume:\n    <UL>\n\t<LI> no shared variables between X and Y\n\t<LI> X may get more instantiated, but not Y\n    </UL>\n    Failure is detected eagerly. Success may be detected late.")]).
