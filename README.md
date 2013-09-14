@@ -36,7 +36,7 @@ Code Layout
 Getting pTunes to Work
 ----------------------
 
-pTunes is a research prototype and, as such, not ready for a real deployment. You should be able to built and run pTunes, however, on TelosB-compliant devices, such as the [Tmote Sky](http://www.snm.ethz.ch/Projects/TmoteSky). Depending on the operating system used on the base station, you may need to update to the corresponding [ECLiPSe](http://eclipseclp.org/) system and Java libraries.
+pTunes is a research prototype and, as such, not ready for a real deployment. You should be able to built and run pTunes, however, on TelosB-compliant devices, such as the [Tmote Sky](http://www.snm.ethz.ch/Projects/TmoteSky). Depending on the operating system used on the base station, you may need to update to the corresponding [ECLiPSe](http://eclipseclp.org/) and Java libraries.
 
 Research
 --------
