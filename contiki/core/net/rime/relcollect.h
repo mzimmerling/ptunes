@@ -91,7 +91,7 @@
 
 #define RELCOLLECT_MAX_DEPTH 255
 
-#define STATIC 1
+#define STATIC 0
 
 struct relcollect_callbacks {
   void (* recv)(const rimeaddr_t *originator,
