@@ -37,7 +37,7 @@
  */
 
 #include "dev/battery-sensor.h"
-#include <io.h>
+#include <legacymsp430.h>
 #include "dev/irq.h"
 
 const struct sensors_sensor battery_sensor;

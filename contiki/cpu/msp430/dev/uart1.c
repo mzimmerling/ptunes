@@ -34,8 +34,7 @@
  */
 
 #include <stdlib.h>
-#include <io.h>
-#include <signal.h>
+#include <legacymsp430.h>
 
 #include "sys/energest.h"
 #include "dev/uart1.h"

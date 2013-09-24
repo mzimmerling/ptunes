@@ -36,7 +36,7 @@
 
 #include <stdio.h>
 
-#include <io.h>
+#include <legacymsp430.h>
 
 #include <dev/sht11.h>
 #include "sht11-arch.h"

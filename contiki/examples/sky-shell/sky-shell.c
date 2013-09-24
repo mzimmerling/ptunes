@@ -59,8 +59,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <io.h>
-#include <signal.h>
+#include <legacymsp430.h>
 
 #define DEBUG_SNIFFERS 0
 

@@ -29,7 +29,7 @@
  * @(#)$Id: spi.c,v 1.1 2006/06/17 22:41:21 adamdunkels Exp $
  */
 
-#include <io.h>
+#include <legacymsp430.h>
 
 #include "contiki-conf.h"
 

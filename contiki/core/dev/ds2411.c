@@ -50,8 +50,7 @@
 
 #include <string.h>
 
-#include <signal.h>
-#include <io.h>
+#include <legacymsp430.h>
 
 #include "contiki.h"
 

@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <cc2420-interrupt.h>
 #include <AT91SAM7S64.h>
-#include <io.h>
+#include <legacymsp430.h>
 
 #define CCIF
 #define CLIF

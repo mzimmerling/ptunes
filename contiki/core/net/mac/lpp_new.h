@@ -38,7 +38,7 @@
 #include "net/mac/mac.h"
 #include "net/rime/relunicast.h"
 #include "dev/radio.h"
-#include <signal.h>
+#include <legacymsp430.h>
 
 struct lpp_new_config {
   rtimer_clock_t on_time;

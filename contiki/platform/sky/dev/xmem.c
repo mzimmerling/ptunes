@@ -42,8 +42,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <io.h>
-#include <signal.h>
+#include <legacymsp430.h>
 
 #include "contiki.h"
 

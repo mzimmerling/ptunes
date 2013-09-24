@@ -37,7 +37,7 @@
  */
 
 #include "dev/ext-sensor.h"
-#include <io.h>
+#include <legacymsp430.h>
 #include "dev/irq.h"
 
 #include <stdio.h>

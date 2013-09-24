@@ -406,7 +406,7 @@ typedef unsigned long off_t;
  * CC2420_ENABLE_SPI/CC2420_DISABLE_SPI???
  */
 
-#include <signal.h>
+#include <legacymsp430.h>
 #define SPI_ENABLE()    do { P4OUT &= ~BV(CSN); } while (0) /* ENABLE CSn (active low) */
 #define SPI_DISABLE()   do { P4OUT |=  BV(CSN); } while (0) /* DISABLE CSn (active low) */
 

@@ -46,7 +46,7 @@
 #if defined(__AVR__)
 #include <avr/io.h>
 #elif defined(__MSP430__)
-#include <io.h>
+#include <legacymsp430.h>
 #endif
 
 #define KEYLEN 16

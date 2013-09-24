@@ -42,7 +42,7 @@
 
 #include <stdio.h>
 
-#include <io.h>
+#include <legacymsp430.h>
 
 #include <contiki.h>
 #include <dev/spi.h>

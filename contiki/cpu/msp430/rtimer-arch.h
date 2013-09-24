@@ -41,7 +41,7 @@
 #ifndef __RTIMER_ARCH_H__
 #define __RTIMER_ARCH_H__
 
-#include <io.h>
+#include <legacymsp430.h>
 #include "sys/rtimer.h"
 
 

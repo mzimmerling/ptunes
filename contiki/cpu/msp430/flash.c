@@ -36,8 +36,7 @@
  */
 
 #include <msp430x14x.h>
-#include <io.h>
-#include <signal.h>
+#include <legacymsp430.h>
 
 #include "dev/flash.h"
 #include "dev/watchdog.h"

@@ -36,7 +36,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #ifdef _MSC_VER
-#include <io.h>
+#include <legacymsp430.h>
 #else
 #include <unistd.h>
 #endif

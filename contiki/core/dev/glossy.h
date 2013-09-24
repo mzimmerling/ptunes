@@ -47,7 +47,7 @@
 #include "dev/leds.h"
 #include "dev/spi.h"
 #include <stdio.h>
-#include <signal.h>
+#include <legacymsp430.h>
 #include <stdlib.h>
 
 #if MAC_PROTOCOL == XMAC

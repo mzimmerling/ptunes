@@ -38,8 +38,7 @@
  *         Adam Dunkels <adam@sics.se>
  */
 
-#include <io.h>
-#include <signal.h>
+#include <legacymsp430.h>
 
 #include "sys/energest.h"
 #include "sys/rtimer.h"

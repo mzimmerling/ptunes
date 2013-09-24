@@ -29,11 +29,9 @@
  * @(#)$Id: contiki-sky-main.c,v 1.56 2009/06/22 11:14:11 nifi Exp $
  */
 
-#include <signal.h>
+#include <legacymsp430.h>
 #include <stdio.h>
 #include <string.h>
-
-#include <io.h>
 
 #include "contiki.h"
 #include "contiki-conf.h"

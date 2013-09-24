@@ -40,6 +40,10 @@
 
 #include "glossy.h"
 
+#define CM_POS              CM_1
+#define CM_NEG              CM_2
+#define CM_BOTH             CM_3
+
 static uint8_t initiator, sync, rx_cnt, tx_cnt, tx_max;
 static uint8_t *data, *packet;
 static uint8_t data_len, packet_len;
@@ -108,7 +112,7 @@ timerb1_interrupt(void)
 					if (glossy_status == GLOSSY_STATUS_ABORTED) {
 						glossy_status = GLOSSY_STATUS_WAITING;
 					} else {
-						if (glossy_status == GLOSSY_STATUS_WAITING && tbiv == TBIV_CCR4) {
+						if (glossy_status == GLOSSY_STATUS_WAITING && tbiv == TBIV_TBCCR4) {
 							// initiator timeout
 							if (rx_cnt == 0) {
 								tx_cnt = 0;
@@ -136,26 +140,26 @@ timerb1_interrupt(void)
 							} else {
 								// not Glossy
 #if MAC_PROTOCOL == LPP_NEW
-							if (tbiv == TBIV_CCR2) {
+							if (tbiv == TBIV_TBCCR2) {
 							  // LPP_NEW send timeout
 							  TBCCTL2 = 0;
 							  process_poll(&send_timeout_process);
 							  LPM4_EXIT;
 							} else {
-								if (tbiv == TBIV_CCR3) {
+								if (tbiv == TBIV_TBCCR3) {
 								  // LPP_NEW dutycycle
 								  dutycycle();
 								  LPM4_EXIT;
 								}
 							}
 #elif MAC_PROTOCOL == XMAC
-							if (tbiv == TBIV_CCR2) {
+							if (tbiv == TBIV_TBCCR2) {
 								// XMAC timeout
 								TBCCTL2 = 0;
 								timeout();
 								LPM4_EXIT;
 							} else {
-								if (tbiv == TBIV_CCR3) {
+								if (tbiv == TBIV_TBCCR3) {
 									// XMAC dutycycle
 									powercycle();
 									LPM4_EXIT;

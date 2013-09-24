@@ -33,7 +33,7 @@
 
 #include <stdlib.h>
 
-#include <io.h>
+#include <legacymsp430.h>
 
 #include "contiki.h"
 #include "dev/light.h"

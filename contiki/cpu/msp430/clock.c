@@ -32,8 +32,7 @@
  */
 
 
-#include <io.h>
-#include <signal.h>
+#include <legacymsp430.h>
 
 #include "contiki-conf.h"
 
@@ -68,7 +67,7 @@ interrupt(TIMERA1_VECTOR) timera1 (void) {
 	    LPM4_EXIT;
 	  }
    } else {
-	  if (taiv == TAIV_CCR2) {
+	  if (taiv == TAIV_TACCR2) {
 		  radio_abort_rx();
 		  LPM4_EXIT;
 	  }

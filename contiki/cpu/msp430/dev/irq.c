@@ -34,7 +34,7 @@
 #include "dev/irq.h"
 #include "dev/lpm.h"
 /*#include "contiki-esb.h"*/
-#include <signal.h>
+#include <legacymsp430.h>
 
 #define ADC12MCTL_NO(adcno) ((unsigned char *) ADC12MCTL0_)[adcno]
 

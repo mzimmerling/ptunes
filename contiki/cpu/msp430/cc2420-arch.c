@@ -29,8 +29,7 @@
  * @(#)$Id: cc2420-arch.c,v 1.4 2009/04/02 22:39:29 joxe Exp $
  */
 
-#include <io.h>
-#include <signal.h>
+#include <legacymsp430.h>
 
 #include "contiki.h"
 #include "contiki-net.h"

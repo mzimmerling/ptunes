@@ -38,7 +38,7 @@
  * (820 bytes on a msp430).
  */
 
-#include <io.h>
+#include <legacymsp430.h>
 
 #include "contiki.h"
 

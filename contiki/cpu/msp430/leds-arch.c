@@ -42,7 +42,7 @@
 #include "contiki-conf.h"
 #include "dev/leds.h"
 
-#include <io.h>
+#include <legacymsp430.h>
 
 /*---------------------------------------------------------------------------*/
 void

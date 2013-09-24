@@ -48,7 +48,7 @@
 
 #include "net/rime/rudolph0.h"
 
-#include <io.h>
+#include <legacymsp430.h>
 
 #define DEBUG 0
 #if DEBUG

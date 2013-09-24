@@ -35,7 +35,7 @@
 
 #include "sys/cc.h"
 
-#include <io.h>
+#include <legacymsp430.h>
 
 #define HWCONF_PIN(name, port, bit)                                           \
 static CC_INLINE void name##_SELECT() {P##port##SEL &= ~(1 << bit);}          \
